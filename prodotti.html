@@ -1,0 +1,481 @@
+﻿<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Fiori recisi, fiori edibili, miele e kombucha dal campo di Pomeranze. Tutto coltivato a mano, stagione per stagione.">
+  <title>Prodotti – Pomeranze</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barrio&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+
+  <style>
+    /* ===== Griglia 2 colonne prodotti ===== */
+    .griglia-prodotti {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--gap);
+    }
+    @media (min-width: 700px) {
+      .griglia-prodotti { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ===== Card prodotto ===== */
+    .card-prodotto {
+      background-color: var(--giallo-verde);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(47, 58, 43, 0.08);
+      display: flex;
+      flex-direction: column;
+      transition: transform var(--transizione), box-shadow var(--transizione);
+    }
+    .card-prodotto:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(47, 58, 43, 0.14);
+    }
+
+    /* Immagine card prodotto */
+    .card-prodotto-img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    /* Corpo card */
+    .card-prodotto-body {
+      padding: 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .card-prodotto-body h3 {
+      font-size: 1.4rem;
+      color: var(--testo);
+      margin-bottom: 0;
+    }
+    .card-prodotto-body p.descrizione {
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: var(--testo);
+      opacity: 0.85;
+      max-width: none;
+      margin-bottom: 0;
+      flex: 1;
+    }
+
+    /* Blocco dettagli */
+    .dettagli {
+      background-color: var(--verde-pastello);
+      border-radius: var(--radius);
+      padding: 0.9rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+    .dettagli dt {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--testo);
+      opacity: 0.6;
+      margin-top: 0.4rem;
+    }
+    .dettagli dt:first-child { margin-top: 0; }
+    .dettagli dd {
+      font-size: 0.9rem;
+      color: var(--testo);
+      margin-left: 0;
+      margin-bottom: 0;
+    }
+
+    /* Footer card */
+    .card-prodotto-footer {
+      padding: 1rem 1.5rem 1.5rem;
+    }
+
+    /* ===== Sezione form richiesta ===== */
+    .form-richiesta {
+      max-width: 580px;
+    }
+    .form-richiesta select {
+      font-family: var(--font-corpo);
+      font-size: 1rem;
+      color: var(--testo);
+      background-color: var(--giallo-verde);
+      border: 2px solid var(--verde-medio);
+      border-radius: var(--radius);
+      padding: 0.65rem 0.9rem;
+      transition: border-color var(--transizione), box-shadow var(--transizione);
+      width: 100%;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%232f3a2b' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.9rem center;
+      cursor: pointer;
+    }
+    .form-richiesta select:focus {
+      outline: none;
+      border-color: var(--verde-medio);
+      box-shadow: 0 0 0 3px rgba(132, 177, 121, 0.2);
+    }
+    .form-richiesta .form-gruppo input,
+    .form-richiesta .form-gruppo textarea {
+      background-color: var(--giallo-verde);
+    }
+
+    /* Messaggio di conferma inline */
+    .conferma-invio {
+      display: none;
+      background-color: var(--verde-pastello);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      text-align: center;
+    }
+    .conferma-invio.visibile { display: block; }
+    .conferma-invio .conferma-titolo {
+      font-family: var(--font-titoli);
+      font-size: 1.8rem;
+      color: var(--testo);
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header fisso" role="banner">
+    <div class="container header-inner">
+      <a href="index.html" class="logo-nome" aria-label="Pomeranze – torna alla home">
+        <img src="assets/img/logo2.png" alt="Pomeranze" class="logo-img">
+        <span class="logo-testo">Pomeranze</span>
+      </a>
+      <button class="hamburger" aria-controls="navigazione-principale"
+              aria-expanded="false" aria-label="Apri menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="site-nav" id="navigazione-principale" aria-label="Navigazione principale">
+        <a href="index.html">Home</a>
+        <a href="chi-sono.html">Chi sono</a>
+        <a href="prodotti.html" class="attivo">Prodotti</a>
+        <a href="workshop.html">Workshop</a>
+        <a href="blog.html">Blog</a>
+        <a href="contatti.html">Contatti</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="pagina-main">
+
+    <!-- ===== INTRO ===== -->
+    <section class="sezione sezione-sfondo-verde" aria-labelledby="titolo-prodotti">
+      <div class="container">
+        <div class="sezione-header rivela">
+          <h1 id="titolo-prodotti">Prodotti</h1>
+          <p>Tutto quello che nasce dal campo di Clelia, stagione dopo stagione.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== GRIGLIA PRODOTTI ===== -->
+    <section class="sezione sezione-sfondo-bianco" aria-label="I prodotti di Pomeranze">
+      <div class="container">
+        <div class="griglia-prodotti">
+
+          <!-- Card 1: Fiori recisi -->
+          <article id="fiori-recisi" class="card-prodotto rivela" aria-labelledby="prod-fiori-recisi">
+            <img src="images/fiorirecisi.jpeg" alt="Fiori recisi dal campo di Pomeranze" class="card-prodotto-img">
+            <div class="card-prodotto-body">
+              <h3 id="prod-fiori-recisi">Fiori recisi</h3>
+              <p class="descrizione">Fiori coltivati in pieno campo e raccolti al mattino presto, quando sono più freschi e profumati. Ogni mazzo è composto a mano con ciò che il campo offre in quel momento, perciò cambia di settimana in settimana seguendo le fioriture. Niente serre né fiori importati: solo stagione vera.</p>
+              <dl class="dettagli">
+                <dt>Stagionalità</dt>
+                <dd>Da aprile a ottobre</dd>
+                <dt>Formati</dt>
+                <dd>Mazzo piccolo / medio / grande · abbonamento settimanale</dd>
+                <dt>Su richiesta</dt>
+                <dd>Composizioni per matrimoni ed eventi</dd>
+              </dl>
+            </div>
+            <div class="card-prodotto-footer">
+              <a href="#richiesta?prodotto=fiori-recisi" class="btn btn-accento btn-richiedi" data-prodotto="fiori-recisi">Richiedi questo prodotto</a>
+            </div>
+          </article>
+
+          <!-- Card 2: Fiori edibili -->
+          <article id="fiori-edibili" class="card-prodotto rivela" aria-labelledby="prod-fiori-edibili">
+            <img src="images/bouquetrosso.jpeg" alt="Fiori edibili dal campo di Pomeranze" class="card-prodotto-img">
+            <div class="card-prodotto-body">
+              <h3 id="prod-fiori-edibili">Fiori edibili</h3>
+              <p class="descrizione">Fiori commestibili coltivati senza trattamenti chimici, pensati per chi ama cucinare e vuole portare colore nel piatto. Perfetti per decorare dolci, insalate, cocktail e piatti gourmet, sia freschi che essiccati. Raccolti e selezionati a mano poco prima della consegna.</p>
+              <dl class="dettagli">
+                <dt>Varietà</dt>
+                <dd>Calendula, fiordaliso, nasturzio, viola (da confermare)</dd>
+                <dt>Formati</dt>
+                <dd>Vaschette fresche · fiori essiccati in vasetto</dd>
+                <dt>Stagionalità</dt>
+                <dd>Primavera–estate</dd>
+                <dt>Disponibili anche per</dt>
+                <dd>Ristoranti e pasticcerie</dd>
+              </dl>
+            </div>
+            <div class="card-prodotto-footer">
+              <a href="#richiesta?prodotto=fiori-edibili" class="btn btn-accento btn-richiedi" data-prodotto="fiori-edibili">Richiedi questo prodotto</a>
+            </div>
+          </article>
+
+          <!-- Card 3: Miele -->
+          <article id="miele" class="card-prodotto rivela" aria-labelledby="prod-miele">
+            <img src="assets/img/prodotto-miele.jpg" alt="Miele di Pomeranze" class="card-prodotto-img">
+            <div class="card-prodotto-body">
+              <h3 id="prod-miele">Miele</h3>
+              <p class="descrizione">Miele prodotto dalle api che vivono attorno al campo, le stesse che impollinano i fiori. Un miele del territorio, lavorato in piccole quantità e non filtrato industrialmente, che racconta le fioriture della zona stagione dopo stagione.</p>
+              <dl class="dettagli">
+                <dt>Tipi</dt>
+                <dd>Millefiori · acacia (da confermare)</dd>
+                <dt>Formati</dt>
+                <dd>Vasetto 250 g · vasetto 500 g</dd>
+                <dt>Produzione</dt>
+                <dd>Estiva, in quantità limitata</dd>
+              </dl>
+            </div>
+            <div class="card-prodotto-footer">
+              <a href="#richiesta?prodotto=miele" class="btn btn-accento btn-richiedi" data-prodotto="miele">Richiedi questo prodotto</a>
+            </div>
+          </article>
+
+          <!-- Card 4: Kombucha -->
+          <article id="kombucha" class="card-prodotto rivela" aria-labelledby="prod-kombucha">
+            <img src="assets/img/prodotto-kombucha.jpg" alt="Kombucha artigianale di Pomeranze" class="card-prodotto-img">
+            <div class="card-prodotto-body">
+              <h3 id="prod-kombucha">Kombucha</h3>
+              <p class="descrizione">Kombucha fermentata artigianalmente: una bevanda viva, frizzante e leggermente acidula, ottima come alternativa naturale alle bibite zuccherate. Prodotta in piccoli lotti e spesso aromatizzata con i fiori e la frutta del campo.</p>
+              <dl class="dettagli">
+                <dt>Gusti</dt>
+                <dd>Da confermare stagionalmente</dd>
+                <dt>Formati</dt>
+                <dd>Bottiglia da 500 ml · bottiglia da 750 ml</dd>
+                <dt>Conservazione</dt>
+                <dd>In frigorifero</dd>
+                <dt>Disponibilità</dt>
+                <dd>Lotti limitati e stagionali</dd>
+              </dl>
+            </div>
+            <div class="card-prodotto-footer">
+              <a href="#richiesta?prodotto=kombucha" class="btn btn-accento btn-richiedi" data-prodotto="kombucha">Richiedi questo prodotto</a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FORM RICHIESTA ===== -->
+    <section id="richiesta" class="sezione sezione-sfondo-verde" aria-labelledby="titolo-richiesta">
+      <div class="container">
+        <div class="sezione-header rivela">
+          <h2 id="titolo-richiesta">Richiedi un prodotto</h2>
+          <p>Scrivi per prenotare, chiedere disponibilità o ricevere un preventivo. Rispondo entro un giorno.</p>
+        </div>
+
+        <!-- Messaggio di conferma (mostrato via JS dopo l'invio) -->
+        <div class="conferma-invio rivela" id="conferma-invio" role="status" aria-live="polite">
+          <p class="conferma-titolo">Messaggio inviato! 🌸</p>
+          <p>Grazie per avermi scritto. Ti rispondo entro un giorno lavorativo.</p>
+        </div>
+
+        <div class="rivela" id="form-wrapper">
+          <form
+            class="form-contatti form-richiesta"
+            name="richiesta-prodotti"
+            method="POST"
+            data-netlify="true"
+            novalidate
+            aria-label="Modulo richiesta prodotto"
+            id="form-richiesta"
+          >
+            <input type="hidden" name="form-name" value="richiesta-prodotti">
+
+            <div class="form-gruppo">
+              <label for="nome">Nome e cognome <span aria-hidden="true">*</span></label>
+              <input
+                type="text"
+                id="nome"
+                name="nome"
+                autocomplete="name"
+                required
+                aria-required="true"
+                placeholder="Es. Maria Rossi"
+              >
+            </div>
+
+            <div class="form-gruppo">
+              <label for="email">Indirizzo email <span aria-hidden="true">*</span></label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                autocomplete="email"
+                required
+                aria-required="true"
+                placeholder="es. maria@esempio.it"
+              >
+            </div>
+
+            <div class="form-gruppo">
+              <label for="telefono">Telefono <span style="font-weight:400; opacity:0.6;">(opzionale)</span></label>
+              <input
+                type="tel"
+                id="telefono"
+                name="telefono"
+                autocomplete="tel"
+                placeholder="Es. +39 333 123 4567"
+              >
+            </div>
+
+            <div class="form-gruppo">
+              <label for="prodotto">Prodotto <span aria-hidden="true">*</span></label>
+              <select id="prodotto" name="prodotto" required aria-required="true">
+                <option value="" disabled selected>Seleziona un prodotto…</option>
+                <option value="fiori-recisi">Fiori recisi</option>
+                <option value="fiori-edibili">Fiori edibili</option>
+                <option value="miele">Miele</option>
+                <option value="kombucha">Kombucha</option>
+              </select>
+            </div>
+
+            <div class="form-gruppo">
+              <label for="messaggio">Messaggio <span aria-hidden="true">*</span></label>
+              <textarea
+                id="messaggio"
+                name="messaggio"
+                required
+                aria-required="true"
+                placeholder="Raccontami di cosa hai bisogno: quantità, date, eventuali richieste speciali…"
+              ></textarea>
+            </div>
+
+            <p style="font-size: 0.8rem; opacity: 0.65; margin-bottom: 0;">
+              I campi contrassegnati con * sono obbligatori. I dati non verranno condivisi con terze parti.
+            </p>
+
+            <button type="submit" class="btn btn-accento">Invia richiesta</button>
+          </form>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a href="index.html" class="logo-nome">
+            <img src="assets/img/logo2.png" alt="Pomeranze" class="logo-img">
+            <span class="logo-testo">Pomeranze</span>
+          </a>
+          <p>Fiori di campo coltivati con cura,<br>direttamente dalla terra alla tua tavola.</p>
+        </div>
+        <nav class="footer-nav" aria-label="Navigazione footer">
+          <h3>Pagine</h3>
+          <a href="chi-sono.html">Chi sono</a>
+          <a href="prodotti.html">Prodotti</a>
+          <a href="workshop.html">Workshop</a>
+          <a href="blog.html">Blog</a>
+          <a href="contatti.html">Contatti</a>
+        </nav>
+        <div class="footer-social">
+          <h3>Seguimi</h3>
+          <ul>
+            <li><a href="#" aria-label="Instagram di Clelia">Instagram</a></li>
+            <li><a href="#" aria-label="Facebook di Clelia">Facebook</a></li>
+            <li><a href="#" aria-label="Pinterest di Clelia">Pinterest</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-bottom">© <span id="anno"></span> Pomeranze – Fiori di campo. Con amore dalla campagna.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    document.getElementById('anno').textContent = new Date().getFullYear();
+
+    /* Preseleziona il prodotto dal parametro URL e scrolla al form */
+    (function () {
+      const mappaOpzioni = {
+        'fiori-recisi':  'fiori-recisi',
+        'fiori-edibili': 'fiori-edibili',
+        'miele':         'miele',
+        'kombucha':      'kombucha'
+      };
+
+      function impostaProdotto(valore) {
+        const select = document.getElementById('prodotto');
+        if (!select || !mappaOpzioni[valore]) return;
+        select.value = mappaOpzioni[valore];
+      }
+
+      /* Legge ?prodotto= dal hash (es. #richiesta?prodotto=miele) */
+      function leggiParametro() {
+        const hash = window.location.hash; // es. "#richiesta?prodotto=miele"
+        const idx  = hash.indexOf('?');
+        if (idx === -1) return null;
+        const params = new URLSearchParams(hash.slice(idx + 1));
+        return params.get('prodotto');
+      }
+
+      /* Click sui bottoni "Richiedi questo prodotto" */
+      document.querySelectorAll('.btn-richiedi').forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+          e.preventDefault();
+          const prodotto = btn.dataset.prodotto;
+          impostaProdotto(prodotto);
+          const target = document.getElementById('richiesta');
+          if (target) target.scrollIntoView({ behavior: 'smooth' });
+          /* Metti il focus sul campo nome per accessibilità */
+          setTimeout(function () {
+            const nome = document.getElementById('nome');
+            if (nome) nome.focus();
+          }, 600);
+        });
+      });
+
+      /* Gestione all'arrivo diretto sulla pagina con hash */
+      window.addEventListener('load', function () {
+        const prodotto = leggiParametro();
+        if (prodotto) {
+          impostaProdotto(prodotto);
+          const target = document.getElementById('richiesta');
+          if (target) setTimeout(function () { target.scrollIntoView({ behavior: 'smooth' }); }, 100);
+        }
+      });
+
+      /* Conferma invio inline (intercetta il submit, poi lascia Netlify fare il POST) */
+      const form = document.getElementById('form-richiesta');
+      if (form) {
+        form.addEventListener('submit', function (e) {
+          if (!form.checkValidity()) return; /* lascia la validazione nativa */
+          /* Mostra messaggio di conferma dopo un tick per non bloccare il POST */
+          setTimeout(function () {
+            document.getElementById('form-wrapper').style.display = 'none';
+            document.getElementById('conferma-invio').classList.add('visibile');
+          }, 100);
+        });
+      }
+    })();
+  </script>
+
+</body>
+</html>

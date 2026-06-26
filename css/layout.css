@@ -1,0 +1,282 @@
+﻿/* ===================================================
+   LAYOUT.CSS — Header, footer, nav, griglie
+   =================================================== */
+
+/* ===== HEADER ===== */
+.site-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 0.75rem 0;
+  transition: background-color var(--transizione), box-shadow var(--transizione);
+  background: var(--verde-chiaro);
+}
+
+/* Sulle pagine secondarie l'header è fisso e sempre opaco */
+.site-header.fisso {
+  position: fixed;
+  background: var(--verde-chiaro);
+  box-shadow: 0 2px 8px rgba(47, 58, 43, 0.1);
+}
+
+/* Dopo lo scroll sulla home: invariato */
+.site-header.solido {
+  background: var(--verde-chiaro);
+  box-shadow: 0 2px 8px rgba(47, 58, 43, 0.12);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+/* --- Logo: immagine + testo affiancati --- */
+.logo-nome {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  transition: opacity var(--transizione);
+}
+
+.logo-nome:hover { opacity: 0.8; }
+
+.logo-img {
+  height: 60px;
+  width: auto;
+  display: block;
+}
+
+.logo-testo {
+  font-family: var(--font-titoli);
+  font-size: 1.8rem;
+  color: var(--testo);
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
+/* --- Navigazione desktop --- */
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.site-nav a {
+  font-family: var(--font-corpo);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--testo);
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius);
+  transition: background-color var(--transizione), color var(--transizione);
+}
+
+.site-nav a:hover {
+  background-color: var(--verde-pastello);
+  color: var(--testo);
+}
+
+.site-nav a.attivo {
+  background-color: var(--verde-pastello);
+  color: var(--testo);
+  text-decoration: underline;
+  text-decoration-color: var(--accento);
+  text-underline-offset: 3px;
+}
+
+/* --- Hamburger (solo mobile) --- */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: var(--radius);
+  transition: background-color var(--transizione);
+}
+
+.hamburger:hover { background-color: var(--verde-pastello); }
+
+.hamburger span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: var(--testo);
+  border-radius: 2px;
+  transition: transform var(--transizione), opacity var(--transizione);
+}
+
+/* Animazione hamburger → X */
+.hamburger[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.hamburger[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ===== NAVIGAZIONE MOBILE ===== */
+@media (max-width: 767px) {
+  .hamburger { display: flex; }
+
+  .site-nav {
+    position: fixed;
+    inset: 0;
+    background-color: var(--giallo-verde);
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+    transform: translateX(100%);
+    transition: transform 0.35s ease;
+    z-index: 90;
+  }
+
+  .site-nav.aperto {
+    transform: translateX(0);
+  }
+
+  .site-nav a {
+    font-size: 1.4rem;
+    padding: 0.75rem 2rem;
+  }
+}
+
+/* ===== FOOTER ===== */
+.site-footer {
+  background-color: var(--verde-pastello);
+  color: var(--testo);
+  padding: 3rem 0 1.5rem;
+}
+
+.footer-inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 600px) {
+  .footer-inner {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 900px) {
+  .footer-inner {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+}
+
+.footer-brand .logo-nome {
+  font-size: 1.8rem;
+  margin-bottom: 0.75rem;
+}
+
+.footer-brand p {
+  font-size: 0.9rem;
+  opacity: 0.75;
+  color: var(--testo);
+}
+
+.footer-nav h3,
+.footer-social h3 {
+  font-family: var(--font-titoli);
+  color: var(--testo);
+  font-size: 1.2rem;
+  margin-bottom: 0.75rem;
+}
+
+.footer-nav a {
+  display: block;
+  color: var(--testo);
+  font-size: 0.9rem;
+  padding: 0.2rem 0;
+  opacity: 0.75;
+  transition: opacity var(--transizione);
+}
+
+.footer-nav a:hover { opacity: 1; }
+
+.footer-social ul {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.footer-social a {
+  color: var(--testo);
+  font-size: 0.9rem;
+  opacity: 0.75;
+  transition: opacity var(--transizione);
+}
+
+.footer-social a:hover { opacity: 1; }
+
+.footer-bottom {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(47, 58, 43, 0.2);
+  text-align: center;
+  font-size: 0.8rem;
+  opacity: 0.6;
+  color: var(--testo);
+}
+
+/* ===== GRIGLIE GENERICHE ===== */
+.griglia-3 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap);
+}
+
+@media (min-width: 600px) {
+  .griglia-3 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 900px) {
+  .griglia-3 { grid-template-columns: repeat(3, 1fr); }
+}
+
+.griglia-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap);
+}
+
+@media (min-width: 700px) {
+  .griglia-2 { grid-template-columns: repeat(2, 1fr); }
+}
+
+.griglia-4 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap);
+}
+
+@media (min-width: 600px) {
+  .griglia-4 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1000px) {
+  .griglia-4 { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ===== SEZIONI INTERNE (pagine secondarie) ===== */
+.pagina-main {
+  padding-top: 5rem; /* spazio per header fisso */
+}
+
+.pagina-sezione {
+  padding: 4rem 0;
+}

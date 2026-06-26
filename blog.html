@@ -1,0 +1,251 @@
+﻿<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Note di stagione, consigli di coltivazione e storie dal campo di Clelia.">
+  <title>Blog – Pomeranze</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barrio&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+
+  <style>
+    /* Stile specifico per gli articoli del blog */
+    .articoli-lista {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .articolo-card {
+      background-color: var(--giallo-verde);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(47,58,43,0.07);
+      display: grid;
+      grid-template-columns: 1fr;
+      transition: transform var(--transizione), box-shadow var(--transizione);
+    }
+
+    @media (min-width: 600px) {
+      .articolo-card {
+        grid-template-columns: 200px 1fr;
+      }
+    }
+
+    .articolo-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(47,58,43,0.12);
+    }
+
+    .articolo-card-img {
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, var(--verde-medio), var(--verde-pastello));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+    }
+
+    @media (min-width: 600px) {
+      .articolo-card-img {
+        aspect-ratio: auto;
+      }
+    }
+
+    .articolo-card-corpo {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .articolo-card-corpo h2 {
+      font-size: 1.3rem;
+    }
+
+    .articolo-card-corpo h2 a {
+      color: var(--testo);
+    }
+
+    .articolo-card-corpo h2 a:hover {
+      color: var(--testo);
+    }
+
+    .articolo-card-corpo p {
+      font-size: 0.95rem;
+      opacity: 0.8;
+      max-width: none;
+      margin-bottom: 0;
+    }
+
+    .articolo-card-footer {
+      margin-top: auto;
+      padding-top: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header fisso" role="banner">
+    <div class="container header-inner">
+      <a href="index.html" class="logo-nome" aria-label="Pomeranze – torna alla home"><img src="assets/img/logo2.png" alt="Pomeranze" class="logo-img"><span class="logo-testo">Pomeranze</span></a>
+      <button class="hamburger" aria-controls="navigazione-principale"
+              aria-expanded="false" aria-label="Apri menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="site-nav" id="navigazione-principale" aria-label="Navigazione principale">
+        <a href="index.html">Home</a>
+        <a href="chi-sono.html">Chi sono</a>
+        <a href="prodotti.html">Prodotti</a>
+        <a href="workshop.html">Workshop</a>
+        <a href="blog.html" class="attivo">Blog</a>
+        <a href="contatti.html">Contatti</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="pagina-main">
+
+    <section class="sezione sezione-sfondo-verde" aria-labelledby="titolo-blog">
+      <div class="container">
+        <div class="sezione-header rivela">
+          <h1 id="titolo-blog">Dal campo</h1>
+          <p>Note di stagione, piccoli esperimenti, qualche consiglio e tante storie dal mio orticello fiorito.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="sezione sezione-sfondo-bianco" aria-label="Articoli del blog">
+      <div class="container">
+        <div class="articoli-lista">
+
+          <article class="articolo-card rivela">
+            <div class="articolo-card-img" role="img" aria-label="Vaso di fiori in acqua">🌺</div>
+            <div class="articolo-card-corpo">
+              <div>
+                <span class="tag">Consigli</span>
+                <span class="card-data" style="margin-left: 0.5rem;">3 giugno 2025</span>
+              </div>
+              <h2><a href="#">Come far durare i fiori recisi più a lungo</a></h2>
+              <p>Cambio l'acqua ogni giorno, taglio i gambi in diagonale sotto l'acqua corrente e tengo i vasi lontano dal sole diretto. Sembra poco, ma è già il novanta per cento del lavoro. In questo articolo vi racconto anche qualche trucco meno noto — come usare l'aspirina, il bicarbonato o una moneta di rame — e vi dico onestamente quali funzionano davvero.</p>
+              <div class="articolo-card-footer">
+                <span style="font-size:0.85rem; opacity:0.6;">5 min di lettura</span>
+                <a href="#" class="btn btn-outline btn-piccolo">Leggi tutto →</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="articolo-card rivela">
+            <div class="articolo-card-img" role="img" aria-label="Semenzali in vasetti di terra">🌱</div>
+            <div class="articolo-card-corpo">
+              <div>
+                <span class="tag">Coltivazione</span>
+                <span class="card-data" style="margin-left: 0.5rem;">18 maggio 2025</span>
+              </div>
+              <h2><a href="#">I fiori da seminare adesso per avere colore tutta estate</a></h2>
+              <p>Se siete partite tardi con le semine (come capita a me ogni anno, nonostante le buone intenzioni di marzo) non disperate. Ci sono specie che fanno ancora in tempo: zinnie, girasoli, cosmos e tagetes germogliano in una settimana e iniziano a fiorire in quattro-sei settimane. Vi racconto i miei preferiti e come non sbagliare i sesti di impianto.</p>
+              <div class="articolo-card-footer">
+                <span style="font-size:0.85rem; opacity:0.6;">7 min di lettura</span>
+                <a href="#" class="btn btn-outline btn-piccolo">Leggi tutto →</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="articolo-card rivela">
+            <div class="articolo-card-img" role="img" aria-label="Alba sul campo di fiori">☀️</div>
+            <div class="articolo-card-corpo">
+              <div>
+                <span class="tag">Vita nel campo</span>
+                <span class="card-data" style="margin-left: 0.5rem;">2 maggio 2025</span>
+              </div>
+              <h2><a href="#">Com'è una giornata nel mio campo</a></h2>
+              <p>Mi sveglio alle sei. Non perché sia una mattiniera di natura — ci ho messo anni — ma perché i fiori vanno raccolti prima che il sole sia alto e inizi a chiuderli. Vi racconto come scorre una giornata tipo: dalla raccolta agli ordini, dal diserbo ai messaggi di Instagram, fino alla sera quando mi siedo sul bordo del campo e guardo le api che tornano all'alveare.</p>
+              <div class="articolo-card-footer">
+                <span style="font-size:0.85rem; opacity:0.6;">6 min di lettura</span>
+                <a href="#" class="btn btn-outline btn-piccolo">Leggi tutto →</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="articolo-card rivela">
+            <div class="articolo-card-img" role="img" aria-label="Api sui fiori">🐝</div>
+            <div class="articolo-card-corpo">
+              <div>
+                <span class="tag">Natura</span>
+                <span class="card-data" style="margin-left: 0.5rem;">14 aprile 2025</span>
+              </div>
+              <h2><a href="#">Perché ho smesso di usare qualsiasi pesticida (e non me ne pento)</a></h2>
+              <p>Il primo anno ho perso metà delle zucchine alle afidi. Ho resistito, ho aspettato, e poi è arrivata un'invasione di coccinelle che ha risolto tutto da sola. Da allora faccio coltivazione biologica per scelta, non per certificazione. Vi racconto cosa ho imparato sulla gestione degli insetti nel campo floreale e perché la biodiversità è la migliore alleata del coltivatore.</p>
+              <div class="articolo-card-footer">
+                <span style="font-size:0.85rem; opacity:0.6;">8 min di lettura</span>
+                <a href="#" class="btn btn-outline btn-piccolo">Leggi tutto →</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="articolo-card rivela">
+            <div class="articolo-card-img" role="img" aria-label="Peonie in boccio">🌸</div>
+            <div class="articolo-card-corpo">
+              <div>
+                <span class="tag">Stagioni</span>
+                <span class="card-data" style="margin-left: 0.5rem;">28 marzo 2025</span>
+              </div>
+              <h2><a href="#">Il mese delle peonie: tutto quello che non sapevo quando ho iniziato</a></h2>
+              <p>Le peonie si piantano in autunno, fioriscono a maggio per tre settimane e poi spariscono fino all'anno dopo. Un investimento a lunghissimo termine — le radici migliorano con gli anni e le piante vivono decenni. Il mio primo anno non ne ho avuta una sola. Il secondo anno, quattro. Adesso ne ho una sessantina e ogni maggio è una meraviglia che devo ancora ricordarmi di fotografare prima di venderle tutte.</p>
+              <div class="articolo-card-footer">
+                <span style="font-size:0.85rem; opacity:0.6;">5 min di lettura</span>
+                <a href="#" class="btn btn-outline btn-piccolo">Leggi tutto →</a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a href="index.html" class="logo-nome">Pomeranze</a>
+          <p>Fiori di campo coltivati con cura,<br>direttamente dalla terra alla tua tavola.</p>
+        </div>
+        <nav class="footer-nav" aria-label="Navigazione footer">
+          <h3>Pagine</h3>
+          <a href="chi-sono.html">Chi sono</a>
+          <a href="prodotti.html">Prodotti</a>
+          <a href="workshop.html">Workshop</a>
+          <a href="blog.html">Blog</a>
+          <a href="contatti.html">Contatti</a>
+        </nav>
+        <div class="footer-social">
+          <h3>Seguimi</h3>
+          <ul>
+            <li><a href="#" aria-label="Instagram di Clelia">Instagram</a></li>
+            <li><a href="#" aria-label="Facebook di Clelia">Facebook</a></li>
+            <li><a href="#" aria-label="Pinterest di Clelia">Pinterest</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-bottom">© <span id="anno"></span> Pomeranze – Fiori di campo. Con amore dalla campagna.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>document.getElementById('anno').textContent = new Date().getFullYear();</script>
+
+</body>
+</html>
