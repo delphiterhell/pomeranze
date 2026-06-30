@@ -63,20 +63,19 @@
   background-color: var(--verde-pastello);
 }
 
-/* Hero a tutto schermo: taglia il cielo in alto, ragazza sempre in basso */
+/* Hero: immagine intera, niente crop, su desktop */
 .hero-immagine {
   display: block;
   width: 100%;
-  height: 100vh;
-  object-fit: cover;
-  object-position: center 80%;
+  height: auto;
 }
 
-@media (max-width: 767px) {
+/* Su mobile: immagine alta e protagonista, ragazza (in basso a sinistra) sempre intera */
+@media (max-width: 768px) {
   .hero-immagine {
-    height: auto;
-    object-fit: unset;
-    object-position: unset;
+    height: 70vh;
+    object-fit: cover;
+    object-position: left bottom;
   }
 }
 
@@ -114,6 +113,31 @@
 .hero-tagline-mobile {
   padding: 2rem 1.25rem 2.5rem;
   background-color: var(--verde-pastello);
+}
+
+@media (max-width: 767px) {
+  .hero-tagline-mobile {
+    position: relative;
+    z-index: 5;
+    margin-top: -1.5rem;
+    border-radius: 1.5rem 1.5rem 0 0;
+  }
+
+  /* Il riquadro diventa la sezione stessa: niente "box dentro box" */
+  .hero-tagline-mobile .hero-tagline-box {
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    border-radius: 0;
+  }
+
+  .hero-tagline-mobile .tagline {
+    font-size: clamp(1.6rem, 7vw, 2.2rem);
+    text-wrap: balance;
+  }
 }
 
 @media (min-width: 768px) {
@@ -496,9 +520,26 @@
   object-fit: cover;
   background: linear-gradient(160deg, var(--verde-medio), var(--verde-pastello));
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 4rem;
+  gap: 0.5rem;
+  padding: 1rem;
+  text-align: center;
+}
+
+.chi-sono-foto .foto-emoji {
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.chi-sono-foto .foto-etichetta {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--testo);
+  opacity: 0.6;
 }
 
 /* ===== TAG CATEGORIE ===== */
