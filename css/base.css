@@ -8,12 +8,13 @@
 /* ---------- Variabili globali ---------- */
 :root {
   /* Palette cromatica */
-  --giallo-verde:  #E8F5BD;  /* sfondo base, sezioni chiare */
-  --verde-pastello:#C7EABB;  /* sezioni alternate, header, hero */
-  --verde-chiaro:  #A2CB8B;  /* elementi secondari */
-  --verde-medio:   #84B179;  /* accenti, hover, dettagli */
-  --accento:       #E07856;  /* bottoni CTA, dettagli caldi */
-  --testo:         #2f3a2b;  /* testo principale */
+  --carta:         #F6F2E9;  /* sfondo pagina e sezioni chiare (neutro caldo, non verde) */
+  --verde-profondo:#344E41;  /* testo principale, titoli */
+  --salvia:        #84A98C;  /* header, footer, accenti */
+  --verde-chiaro:  #E4ECD8;  /* card e sezioni alternate */
+  --terracotta:    #E07856;  /* SOLO bottoni/CTA e dettagli forti */
+  --ocra:          #D9A441;  /* piccoli dettagli: underline, icone, hover */
+  --testo:         #344E41;  /* = verde profondo */
 
   /* Tipografia */
   --font-titoli: 'Barrio', cursive;
@@ -59,12 +60,13 @@ html {
 body {
   font-family: var(--font-corpo);
   color: var(--testo);
-  background-color: var(--giallo-verde);
+  background-color: var(--carta);
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
 }
 
 /* ---------- Tipografia di base ---------- */
+/* Barrio per tutti i titoli del sito; Open Sauce resta per il corpo */
 h1, h2, h3, .logo-nome, .tagline {
   font-family: var(--font-titoli);
   line-height: 1.2;
@@ -72,12 +74,13 @@ h1, h2, h3, .logo-nome, .tagline {
 }
 
 h1 { font-size: clamp(2.2rem, 6vw, 4rem); }
-h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); }
+h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: 0.75rem; }
 h3 { font-size: clamp(1.3rem, 3vw, 1.8rem); }
 
 p {
   max-width: 68ch;
   margin-bottom: 1rem;
+  line-height: 1.6;
 }
 
 a {
@@ -88,7 +91,7 @@ a {
 
 a:hover,
 a:focus-visible {
-  color: var(--verde-medio);
+  color: var(--salvia);
 }
 
 img {

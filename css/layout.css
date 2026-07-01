@@ -11,20 +11,20 @@
   z-index: 100;
   padding: 0.75rem 0;
   transition: background-color var(--transizione), box-shadow var(--transizione);
-  background: var(--verde-chiaro);
+  background: var(--salvia);
 }
 
 /* Sulle pagine secondarie l'header è fisso e sempre opaco */
 .site-header.fisso {
   position: fixed;
-  background: var(--verde-chiaro);
-  box-shadow: 0 2px 8px rgba(47, 58, 43, 0.1);
+  background: var(--salvia);
+  box-shadow: 0 2px 8px rgba(52, 78, 65, 0.1);
 }
 
 /* Dopo lo scroll sulla home: invariato */
 .site-header.solido {
-  background: var(--verde-chiaro);
-  box-shadow: 0 2px 8px rgba(47, 58, 43, 0.12);
+  background: var(--salvia);
+  box-shadow: 0 2px 8px rgba(52, 78, 65, 0.12);
 }
 
 .header-inner {
@@ -49,6 +49,7 @@
   height: 60px;
   width: auto;
   display: block;
+  background: transparent;
 }
 
 .logo-testo {
@@ -77,15 +78,15 @@
 }
 
 .site-nav a:hover {
-  background-color: var(--verde-pastello);
+  background-color: var(--verde-chiaro);
   color: var(--testo);
 }
 
 .site-nav a.attivo {
-  background-color: var(--verde-pastello);
+  background-color: var(--verde-chiaro);
   color: var(--testo);
   text-decoration: underline;
-  text-decoration-color: var(--accento);
+  text-decoration-color: var(--terracotta);
   text-underline-offset: 3px;
 }
 
@@ -105,7 +106,7 @@
   transition: background-color var(--transizione);
 }
 
-.hamburger:hover { background-color: var(--verde-pastello); }
+.hamburger:hover { background-color: var(--verde-chiaro); }
 
 .hamburger span {
   display: block;
@@ -134,7 +135,7 @@
   .site-nav {
     position: fixed;
     inset: 0;
-    background-color: var(--giallo-verde);
+    background-color: var(--carta);
     flex-direction: column;
     justify-content: center;
     gap: 1.5rem;
@@ -155,7 +156,7 @@
 
 /* ===== FOOTER ===== */
 .site-footer {
-  background-color: var(--verde-pastello);
+  background-color: var(--salvia);
   color: var(--testo);
   padding: 3rem 0 1.5rem;
 }
@@ -226,7 +227,7 @@
 .footer-bottom {
   margin-top: 2rem;
   padding-top: 1rem;
-  border-top: 1px solid rgba(47, 58, 43, 0.2);
+  border-top: 1px solid rgba(52, 78, 65, 0.2);
   text-align: center;
   font-size: 0.8rem;
   opacity: 0.6;

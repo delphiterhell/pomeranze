@@ -43,44 +43,33 @@
 
   <main>
 
-    <!-- ===== HERO ===== -->
-    <section class="hero" aria-labelledby="hero-titolo">
+    <!-- ===== HERO A TUTTA FINESTRA ===== -->
+    <section class="hero-viewport" aria-labelledby="hero-titolo">
 
-      <!-- Collage mostrato intero: l'<img> determina l'altezza, niente crop -->
+      <!-- Collage con la ragazza, a tutta finestra -->
       <img
         src="images/hero.png"
         alt="Illustrazione del campo di fiori di Clelia con la sua figura in basso a sinistra"
-        class="hero-immagine"
+        class="hero-bg"
       >
 
-      <!-- Api animate sopra l'immagine -->
+      <!-- Api animate sopra tutta la hero -->
       <div class="api-container" aria-hidden="true"></div>
 
-      <!-- Tagline desktop: sovrapposta in alto a destra tramite position:absolute -->
-      <div class="hero-contenuto" aria-labelledby="hero-titolo">
-        <div class="hero-tagline-box">
-          <p class="tagline" id="hero-titolo">«Fiori che profumano di campo»</p>
-          <p>Fiori coltivati con cura, stagione dopo stagione, per portare un po' di campo nella tua vita.</p>
-          <a href="#prodotti" class="btn btn-accento">Scopri i fiori</a>
-        </div>
+      <!-- Testo su velo a gradiente, ancorato a destra -->
+      <div class="hero-velo">
+       <!--  <span class="hero-kicker">Pomeranze · fiori di campo</span> -->
+        <h1 id="hero-titolo" class="hero-titolo-grande">«Fiori che profumano di campo»</h1>
+        <p class="hero-sottotitolo">Fiori coltivati con cura, stagione dopo stagione, per portare un po' di campo nella tua vita.</p>
+        <a href="#prodotti" class="btn btn-accento btn-pillola">Scopri i fiori</a>
       </div>
 
-      <!-- Indicatore di scroll (solo desktop) -->
-      <div class="scroll-indicator" aria-hidden="true">
-        <span>Scorri</span>
-        <div class="scroll-chevron"></div>
+      <!-- Indicatore di scroll -->
+      <div class="hero-scroll-indicator" aria-hidden="true">
+        <div class="hero-scroll-chevron"></div>
       </div>
 
     </section>
-
-    <!-- Tagline mobile: sotto l'immagine, nel flusso normale -->
-    <div class="hero-tagline-mobile" aria-labelledby="hero-titolo-mobile">
-      <div class="hero-tagline-box">
-        <p class="tagline" id="hero-titolo-mobile">«Fiori che profumano di campo»</p>
-        <p>Fiori coltivati con cura, stagione dopo stagione, per portare un po' di campo nella tua vita.</p>
-        <a href="#prodotti" class="btn btn-accento">Scopri i fiori</a>
-      </div>
-    </div>
 
     <!-- ===== CHI SONO (anteprima) ===== -->
     <section id="chi-sono" class="sezione sezione-sfondo-bianco" aria-labelledby="titolo-chi-sono">

@@ -27,17 +27,17 @@
 
     /* ===== Card prodotto ===== */
     .card-prodotto {
-      background-color: var(--giallo-verde);
+      background-color: var(--verde-chiaro);
       border-radius: var(--radius-lg);
       overflow: hidden;
-      box-shadow: 0 2px 12px rgba(47, 58, 43, 0.08);
+      box-shadow: 0 4px 16px rgba(52, 78, 65, 0.08);
       display: flex;
       flex-direction: column;
       transition: transform var(--transizione), box-shadow var(--transizione);
     }
     .card-prodotto:hover {
       transform: translateY(-4px);
-      box-shadow: 0 8px 24px rgba(47, 58, 43, 0.14);
+      box-shadow: 0 8px 24px rgba(52, 78, 65, 0.14);
     }
 
     /* Immagine card prodotto */
@@ -58,6 +58,7 @@
       gap: 1rem;
     }
     .card-prodotto-body h3 {
+      font-family: var(--font-titoli);
       font-size: 1.4rem;
       color: var(--testo);
       margin-bottom: 0;
@@ -74,7 +75,7 @@
 
     /* Blocco dettagli */
     .dettagli {
-      background-color: var(--verde-pastello);
+      background-color: var(--carta);
       border-radius: var(--radius);
       padding: 0.9rem 1rem;
       display: flex;
@@ -111,33 +112,33 @@
       font-family: var(--font-corpo);
       font-size: 1rem;
       color: var(--testo);
-      background-color: var(--giallo-verde);
-      border: 2px solid var(--verde-medio);
+      background-color: var(--carta);
+      border: 2px solid var(--salvia);
       border-radius: var(--radius);
       padding: 0.65rem 0.9rem;
       transition: border-color var(--transizione), box-shadow var(--transizione);
       width: 100%;
       appearance: none;
       -webkit-appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%232f3a2b' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23344E41' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-position: right 0.9rem center;
       cursor: pointer;
     }
     .form-richiesta select:focus {
       outline: none;
-      border-color: var(--verde-medio);
-      box-shadow: 0 0 0 3px rgba(132, 177, 121, 0.2);
+      border-color: var(--salvia);
+      box-shadow: 0 0 0 3px rgba(132, 169, 140, 0.25);
     }
     .form-richiesta .form-gruppo input,
     .form-richiesta .form-gruppo textarea {
-      background-color: var(--giallo-verde);
+      background-color: var(--carta);
     }
 
     /* Messaggio di conferma inline */
     .conferma-invio {
       display: none;
-      background-color: var(--verde-pastello);
+      background-color: var(--verde-chiaro);
       border-radius: var(--radius-lg);
       padding: 2rem;
       text-align: center;
@@ -255,7 +256,7 @@
 
           <!-- Card 4: Kombucha -->
           <article id="kombucha" class="card-prodotto rivela" aria-labelledby="prod-kombucha">
-            <img src="assets/img/prodotto-kombucha.jpg" alt="Kombucha artigianale di Pomeranze" class="card-prodotto-img">
+            <img src="images/kombucha.png" alt="Kombucha artigianale di Pomeranze" class="card-prodotto-img">
             <div class="card-prodotto-body">
               <h3 id="prod-kombucha">Kombucha</h3>
               <p class="descrizione">Kombucha fermentata artigianalmente: una bevanda viva, frizzante e leggermente acidula, ottima come alternativa naturale alle bibite zuccherate. Prodotta in piccoli lotti e spesso aromatizzata con i fiori e la frutta del campo.</p>

@@ -41,41 +41,26 @@
     `;
   }
 
-  /* ---------- Configurazioni delle 4 api ---------- */
-  const configApi = [
-    {
-      // Ape 1 – in alto a sinistra
-      startX: 15, startY: 20,
-      animazione: 'vola-1',
-      durata: '9s',
-      ritardo: '0s',
-      dimensione: '38px',
-    },
-    {
-      // Ape 2 – in alto a destra
-      startX: 70, startY: 25,
-      animazione: 'vola-2',
-      durata: '12s',
-      ritardo: '-3s',
-      dimensione: '32px',
-    },
-    {
-      // Ape 3 – centro-basso
-      startX: 45, startY: 55,
-      animazione: 'vola-3',
-      durata: '10s',
-      ritardo: '-6s',
-      dimensione: '36px',
-    },
-    {
-      // Ape 4 – destra centrale
-      startX: 80, startY: 45,
-      animazione: 'vola-4',
-      durata: '14s',
-      ritardo: '-2s',
-      dimensione: '30px',
-    },
-  ];
+  /* ---------- Configurazioni api ----------
+     Mobile (<768px): 3 api distanziate; Desktop: 4 api          */
+  const mobile = window.innerWidth < 768;
+
+  const configApi = mobile
+    ? [
+        // Alto a sinistra — zona cielo
+        { startX: 25, startY: 12, animazione: 'vola-1', durata: '9s',  ritardo: '0s',  dimensione: '34px' },
+        // Centro-destra — campo aperto
+        { startX: 62, startY: 38, animazione: 'vola-3', durata: '11s', ritardo: '-5s', dimensione: '30px' },
+        // Basso a sinistra — vicino alla ragazza ma a debita distanza
+        { startX: 30, startY: 72, animazione: 'vola-2', durata: '13s', ritardo: '-8s', dimensione: '28px' },
+      ]
+    : [
+        // Desktop: 4 api
+        { startX: 12, startY: 18, animazione: 'vola-1', durata: '9s',  ritardo: '0s',  dimensione: '38px' },
+        { startX: 30, startY: 55, animazione: 'vola-2', durata: '12s', ritardo: '-3s', dimensione: '32px' },
+        { startX: 48, startY: 30, animazione: 'vola-3', durata: '10s', ritardo: '-6s', dimensione: '36px' },
+        { startX: 18, startY: 68, animazione: 'vola-4', durata: '14s', ritardo: '-2s', dimensione: '30px' },
+      ];
 
   /* ---------- Creazione delle api nel DOM ---------- */
   configApi.forEach((cfg) => {
