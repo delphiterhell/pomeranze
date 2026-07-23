@@ -18,13 +18,13 @@
 .site-header.fisso {
   position: fixed;
   background: var(--salvia);
-  box-shadow: 0 2px 8px rgba(52, 78, 65, 0.1);
+  box-shadow: 0 2px 8px rgba(59, 65, 39, 0.1);
 }
 
 /* Dopo lo scroll sulla home: invariato */
 .site-header.solido {
   background: var(--salvia);
-  box-shadow: 0 2px 8px rgba(52, 78, 65, 0.12);
+  box-shadow: 0 2px 8px rgba(59, 65, 39, 0.12);
 }
 
 .header-inner {
@@ -46,10 +46,12 @@
 .logo-nome:hover { opacity: 0.8; }
 
 .logo-img {
-  height: 60px;
-  width: auto;
+  height: 56px;
+  width: 56px;
   display: block;
-  background: transparent;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
 }
 
 .logo-testo {
@@ -135,7 +137,7 @@
   .site-nav {
     position: fixed;
     inset: 0;
-    background-color: var(--carta);
+    background-color: var(--crema);
     flex-direction: column;
     justify-content: center;
     gap: 1.5rem;
@@ -156,8 +158,8 @@
 
 /* ===== FOOTER ===== */
 .site-footer {
-  background-color: var(--salvia);
-  color: var(--testo);
+  background-color: var(--testo);
+  color: var(--crema);
   padding: 3rem 0 1.5rem;
 }
 
@@ -187,51 +189,56 @@
 .footer-brand p {
   font-size: 0.9rem;
   opacity: 0.75;
-  color: var(--testo);
+  color: var(--crema);
+}
+
+.site-footer .logo-testo {
+  color: var(--crema);
 }
 
 .footer-nav h3,
 .footer-social h3 {
   font-family: var(--font-titoli);
-  color: var(--testo);
+  color: var(--crema);
   font-size: 1.2rem;
   margin-bottom: 0.75rem;
 }
 
 .footer-nav a {
   display: block;
-  color: var(--testo);
+  color: var(--crema);
   font-size: 0.9rem;
   padding: 0.2rem 0;
   opacity: 0.75;
   transition: opacity var(--transizione);
 }
 
-.footer-nav a:hover { opacity: 1; }
+.footer-nav a:hover { opacity: 1; color: var(--crema); }
 
 .footer-social ul {
   display: flex;
-  gap: 0.75rem;
+  flex-direction: column;
+  gap: 0.4rem;
   flex-wrap: wrap;
 }
 
 .footer-social a {
-  color: var(--testo);
+  color: var(--crema);
   font-size: 0.9rem;
   opacity: 0.75;
   transition: opacity var(--transizione);
 }
 
-.footer-social a:hover { opacity: 1; }
+.footer-social a:hover { opacity: 1; color: var(--crema); }
 
 .footer-bottom {
   margin-top: 2rem;
   padding-top: 1rem;
-  border-top: 1px solid rgba(52, 78, 65, 0.2);
+  border-top: 1px solid rgba(246, 240, 215, 0.2);
   text-align: center;
   font-size: 0.8rem;
-  opacity: 0.6;
-  color: var(--testo);
+  opacity: 0.55;
+  color: var(--crema);
 }
 
 /* ===== GRIGLIE GENERICHE ===== */

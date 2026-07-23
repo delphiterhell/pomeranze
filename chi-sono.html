@@ -18,7 +18,7 @@
 
   <header class="site-header fisso" role="banner">
     <div class="container header-inner">
-      <a href="index.html" class="logo-nome" aria-label="Pomeranze – torna alla home"><img src="assets/img/logo2.png" alt="Pomeranze" class="logo-img"><span class="logo-testo">Pomeranze</span></a>
+      <a href="index.html" class="logo-nome" aria-label="Pomeranze – torna alla home"><img src="images/logodef.png" alt="Pomeranze" class="logo-img"><span class="logo-testo">Pomeranze</span></a>
       <button class="hamburger" aria-controls="navigazione-principale"
               aria-expanded="false" aria-label="Apri menu">
         <span></span><span></span><span></span>
@@ -51,10 +51,10 @@
       <div class="container">
         <div class="chi-sono-griglia">
 
-          <div class="chi-sono-foto rivela" role="img" aria-label="Foto di Clelia nel campo tra i fiori">
-            <span class="foto-emoji">🌸</span>
-            <span class="foto-etichetta">Foto in arrivo</span>
-          </div>
+      <!-- IMMAGINE -->
+      <div class="chi-sono-foto rivela">
+        <img src="images/cane.jpeg" alt="Clelia nel campo tra i fiori">
+      </div>
 
           <div>
             <h2 class="rivela">La mia storia</h2>
@@ -68,41 +68,70 @@
     </section>
 
     <!-- Valori -->
-    <section class="sezione sezione-sfondo-giallo" aria-labelledby="titolo-valori">
-      <div class="container">
-        <div class="sezione-header testo-centrato rivela">
-          <h2 id="titolo-valori">Come lavoro</h2>
-          <p>Qualche principio che guida ogni mia giornata nel campo.</p>
+<section class="sezione sezione-sfondo-giallo" aria-labelledby="titolo-valori">
+  <div class="container">
+
+    <div class="sezione-header testo-centrato rivela">
+      <h2 id="titolo-valori">Come lavoro</h2>
+      <p>Qualche principio che guida ogni mia giornata nel campo.</p>
+    </div>
+
+    <div class="griglia-3">
+
+      <!-- CARD 1 -->
+      <div class="card rivela">
+        <div class="card-img">
+          <img src="images/terra.png" alt="Fiore stagionale che cresce dalla terra">
         </div>
-        <div class="griglia-3">
 
-          <div class="card rivela">
-            <div class="card-img-placeholder" aria-label="Sementi di stagione">🌱</div>
-            <div class="card-body">
-              <h3 class="card-titolo">Solo stagionale</h3>
-              <p class="card-testo">Non forzo le piante. Ogni fiore arriva quando è il suo momento. Questo vuol dire che la disponibilità cambia continuamente — ed è proprio questo che trovo bello.</p>
-            </div>
-          </div>
+        <div class="card-body">
+          <h3 class="card-titolo">Solo stagionale</h3>
 
-          <div class="card rivela">
-            <div class="card-img-placeholder" aria-label="Apicoltura naturale">🐝</div>
-            <div class="card-body">
-              <h3 class="card-titolo">Rispetto per gli insetti</h3>
-              <p class="card-testo">Niente pesticidi. Lascio le api lavorare, pianto varietà mellifere, tollero qualche fogliolina smangiata. Il campo è anche loro, non solo mio.</p>
-            </div>
-          </div>
-
-          <div class="card rivela">
-            <div class="card-img-placeholder" aria-label="Bouquet avvolti in carta riciclata">♻️</div>
-            <div class="card-body">
-              <h3 class="card-titolo">Zero plastica</h3>
-              <p class="card-testo">I bouquet sono avvolti in carta naturale o kraft. Le confezioni regalo usano nastri di cotone. Piccole scelte, ogni giorno.</p>
-            </div>
-          </div>
-
+          <p class="card-testo">
+            Non forzo le piante. Ogni fiore arriva quando è il suo momento.
+            Questo vuol dire che la disponibilità cambia continuamente —
+            ed è proprio questo che trovo bello.
+          </p>
         </div>
       </div>
-    </section>
+
+      <!-- CARD 2 -->
+      <div class="card rivela">
+        <div class="card-img">
+          <img src="images/beecome.png" alt="Ape tra i fiori">
+        </div>
+
+        <div class="card-body">
+          <h3 class="card-titolo">Rispetto per gli insetti</h3>
+
+          <p class="card-testo">
+            Niente pesticidi. Lascio le api lavorare, pianto varietà
+            mellifere, tollero qualche fogliolina smangiata.
+            Il campo è anche loro, non solo mio.
+          </p>
+        </div>
+      </div>
+
+      <!-- CARD 3 -->
+      <div class="card rivela">
+        <div class="card-img">
+          <img src="images/bouquet.png" alt="Bouquet avvolto in carta kraft">
+        </div>
+
+        <div class="card-body">
+          <h3 class="card-titolo">Zero plastica</h3>
+
+          <p class="card-testo">
+            I bouquet sono avvolti in carta naturale o kraft.
+            Le confezioni regalo usano nastri di cotone.
+            Piccole scelte, ogni giorno.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
 
     <!-- CTA -->
     <section class="sezione sezione-sfondo-verde" aria-label="Invito a contattare Clelia">

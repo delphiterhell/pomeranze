@@ -8,13 +8,12 @@
 /* ---------- Variabili globali ---------- */
 :root {
   /* Palette cromatica */
-  --carta:         #F6F2E9;  /* sfondo pagina e sezioni chiare (neutro caldo, non verde) */
-  --verde-profondo:#344E41;  /* testo principale, titoli */
-  --salvia:        #84A98C;  /* header, footer, accenti */
-  --verde-chiaro:  #E4ECD8;  /* card e sezioni alternate */
-  --terracotta:    #E07856;  /* SOLO bottoni/CTA e dettagli forti */
-  --ocra:          #D9A441;  /* piccoli dettagli: underline, icone, hover */
-  --testo:         #344E41;  /* = verde profondo */
+  --crema:        #F6F0D7;  /* sfondo dominante della pagina */
+  --verde-chiaro: #C5D89D;  /* sezioni alternate e card, con parsimonia */
+  --salvia:       #9CAB84;  /* header, footer, dettagli */
+  --oliva:        #89986D;  /* accenti secondari, bordi */
+  --testo:        #2C3127;  /* testo e titoli */
+  --terracotta:   #E07856;  /* CTA e accento caldo */
 
   /* Tipografia */
   --font-titoli: 'Barrio', cursive;
@@ -60,7 +59,7 @@ html {
 body {
   font-family: var(--font-corpo);
   color: var(--testo);
-  background-color: var(--carta);
+  background-color: var(--crema);
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
 }
@@ -99,6 +98,9 @@ img {
   height: auto;
   display: block;
 }
+
+.mobile-br { display: none; }
+@media (max-width: 767px) { .mobile-br { display: block; } }
 
 ul, ol {
   list-style: none;

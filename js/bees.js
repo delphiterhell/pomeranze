@@ -49,10 +49,10 @@
     ? [
         // Alto a sinistra — zona cielo
         { startX: 25, startY: 12, animazione: 'vola-1', durata: '9s',  ritardo: '0s',  dimensione: '34px' },
-        // Centro-destra — campo aperto
-        { startX: 62, startY: 38, animazione: 'vola-3', durata: '11s', ritardo: '-5s', dimensione: '30px' },
-        // Basso a sinistra — vicino alla ragazza ma a debita distanza
-        { startX: 30, startY: 72, animazione: 'vola-2', durata: '13s', ritardo: '-8s', dimensione: '28px' },
+        // Centro-destra — campo aperto, più in alto
+        { startX: 65, startY: 28, animazione: 'vola-3', durata: '11s', ritardo: '-5s', dimensione: '30px' },
+        // Basso a sinistra — ben separato, più a sinistra e più in basso
+        { startX: 12, startY: 80, animazione: 'vola-2', durata: '13s', ritardo: '-8s', dimensione: '28px' },
       ]
     : [
         // Desktop: 4 api

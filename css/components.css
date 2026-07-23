@@ -54,37 +54,92 @@
 .hero-viewport {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 100svh;
   overflow: hidden;
-  background-color: var(--verde-profondo);
+  background-color: var(--testo);
 }
 
-/* Foto: ragazza a sinistra sempre visibile */
+/* Sfondo: campo di fiori, si ritaglia liberamente */
 .hero-bg {
   position: absolute;
   inset: 0;
-  z-index: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: left center;
+  object-position: center 40%;
+  z-index: 0;
   display: block;
 }
 
-/* Blocco testo centrato verticalmente a destra — nessun box/velo, solo text-shadow */
+/* Overlay semitrasparente */
+.hero-viewport::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(20, 30, 10, 0.05) 0%,
+    rgba(20, 30, 10, 0.40) 50%,
+    rgba(20, 30, 10, 0.60) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Blocco testo — copre tutta la hero, kicker+titolo allineati a destra */
 .hero-velo {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  right: 5%;
-  bottom: auto;
-  z-index: 3;
-  max-width: 42%;
+  inset: 0;
+  max-width: 100%;
+  transform: none;
+  z-index: 4;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  text-align: right;
+  justify-content: center;
+  padding-right: 5%;
 }
+
+/* Proprietà condivise ragazza (nessuna dimensione — vanno nei breakpoint) */
+.hero-ragazza {
+  display: block;
+  pointer-events: none;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  background: none;
+  flex-shrink: 0;
+}
+
+/* Desktop: ragazza alta come la hero, bottom-row assoluto in basso */
+@media (min-width: 768px) {
+  .hero-bottom-row {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    z-index: 4;
+  }
+
+  .hero-ragazza {
+    height: 90vh;
+    width: auto;
+  }
+
+  .hero-bottom-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+    padding-right: 5%;
+    padding-bottom: 2.5rem;
+    margin-left: auto;
+  }
+}
+
 
 .hero-kicker {
   font-family: var(--font-corpo);
@@ -92,24 +147,24 @@
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--carta);
+  color: var(--crema);
   text-shadow: 0 1px 8px rgba(20, 30, 20, 0.6);
   margin-bottom: 0.9rem;
 }
 
 .hero-titolo-grande {
   font-family: var(--font-titoli);
-  font-size: clamp(2.4rem, 4vw, 4rem);
+  font-size: clamp(2rem, 2.8vw, 3.2rem);
   line-height: 0.95;
-  color: var(--carta);
-  text-wrap: balance;
+  white-space: nowrap;
+  color: var(--crema);
   text-shadow: 0 2px 14px rgba(20, 30, 20, 0.55);
   margin-bottom: 1rem;
 }
 
 .hero-sottotitolo {
   font-size: 0.95rem;
-  color: var(--carta);
+  color: var(--crema);
   opacity: 0.9;
   text-shadow: 0 1px 8px rgba(20, 30, 20, 0.5);
   margin-bottom: 1.5rem;
@@ -117,29 +172,69 @@
   line-height: 1.5;
 }
 
-/* Mobile (<768px): ragazza a sinistra, testo in basso a destra */
+/* Mobile (<768px) */
 @media (max-width: 767px) {
   .hero-bg {
-    object-position: 22% center;
+    object-fit: cover;
+    object-position: 40% center;
   }
 
+  .hero-scroll-indicator {
+    display: none;
+  }
+
+
+  /* Testo: copre tutta la hero così bottom-row può ancorarsi in fondo */
   .hero-velo {
-    top: auto;
-    bottom: 6%;
-    right: 5%;
-    left: auto;
-    transform: none;
-    max-width: 62%;
-    align-items: flex-end;
-    text-align: right;
+    inset: 0;
+    padding-top: 80%;
+    padding-left: 4%;
+    padding-right: 4%;
+    align-items: flex-start;
+    justify-content: flex-start;
   }
 
   .hero-titolo-grande {
-    font-size: clamp(1.9rem, 7vw, 2.5rem);
+    white-space: normal;
+    font-size: clamp(1.6rem, 6.8vw, 3rem);
+    text-align: center;
+    letter-spacing: 0.10em;
+    width: 100%;
+  }
+
+  /* hero-bottom-row: ancorata al fondo della hero */
+  .hero-bottom-row {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 12px;
+  }
+
+  /* Ragazza: larghezza naturale, proporzionata */
+  .hero-ragazza {
+    width: 50%;
+    height: auto;
+    flex-shrink: 0;
+    margin-left: -4%;
+  }
+
+  /* Sottotitolo + bottone: centrati nella colonna destra */
+  .hero-bottom-text {
+    flex: 1;
+    align-items: center;
+    text-align: center;
+    padding-right: 4%;
+    padding-bottom: 1.5rem;
+    margin-left: 0;
   }
 
   .hero-sottotitolo {
-    display: none;
+    font-size: 0.85rem;
+    max-width: 100%;
   }
 }
 
@@ -160,8 +255,8 @@
 .hero-scroll-chevron {
   width: 22px;
   height: 22px;
-  border-right: 3px solid var(--carta);
-  border-bottom: 3px solid var(--carta);
+  border-right: 3px solid var(--crema);
+  border-bottom: 3px solid var(--crema);
   transform: rotate(45deg);
   opacity: 0.7;
   filter: drop-shadow(0 1px 4px rgba(20, 30, 20, 0.5));
@@ -233,10 +328,10 @@
 
 /* ===== CARD ===== */
 .card {
-  background-color: var(--carta);
+  background-color: var(--crema);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: 0 2px 12px rgba(52, 78, 65, 0.08);
+  box-shadow: 0 2px 12px rgba(59, 65, 39, 0.08);
   transition: transform var(--transizione), box-shadow var(--transizione);
   display: flex;
   flex-direction: column;
@@ -244,7 +339,7 @@
 
 .card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(52, 78, 65, 0.14);
+  box-shadow: 0 8px 24px rgba(59, 65, 39, 0.14);
 }
 
 .card-img {
@@ -317,11 +412,11 @@
 }
 
 .sezione-sfondo-bianco {
-  background-color: var(--carta);
+  background-color: var(--crema);
 }
 
 .sezione-sfondo-giallo {
-  background-color: var(--carta);
+  background-color: var(--crema);
 }
 
 .sezione-header {
@@ -349,6 +444,10 @@
 }
 
 .sezione-header.testo-centrato h2::after {
+  margin-inline: auto;
+}
+
+.sezione-header.testo-centrato p {
   margin-inline: auto;
 }
 
@@ -412,7 +511,7 @@
   font-family: var(--font-corpo);
   font-size: 1rem;
   color: var(--testo);
-  background-color: var(--carta);
+  background-color: var(--crema);
   border: 2px solid var(--salvia);
   border-radius: var(--radius);
   padding: 0.65rem 0.9rem;
@@ -424,7 +523,7 @@
 .form-gruppo textarea:focus {
   outline: none;
   border-color: var(--salvia);
-  box-shadow: 0 0 0 3px rgba(132, 169, 140, 0.25);
+  box-shadow: 0 0 0 3px rgba(156, 171, 132, 0.25);
 }
 
 .form-gruppo textarea {
@@ -437,8 +536,8 @@
   background-color: var(--verde-chiaro);
   border-radius: var(--radius-lg);
   padding: 1.75rem;
-  border-left: 4px solid var(--ocra);
-  box-shadow: 0 2px 8px rgba(52, 78, 65, 0.06);
+  border-left: 4px solid var(--oliva);
+  box-shadow: 0 2px 8px rgba(59, 65, 39, 0.06);
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
@@ -447,7 +546,7 @@
 
 .workshop-item:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(52, 78, 65, 0.12);
+  box-shadow: 0 6px 20px rgba(59, 65, 39, 0.12);
 }
 
 .workshop-data {
@@ -518,6 +617,288 @@
   border-radius: 999px;
   background-color: var(--salvia);
   color: var(--testo);
+}
+
+/* ===== DIVISORE CREMA CON FOGLIA ===== */
+.divisore-crema {
+  background-color: var(--crema);
+  padding: 2.5rem 0;
+}
+
+/* ===== FOGLIOLINA DIVISORE TRA SEZIONI ===== */
+.foglia-divisore {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem 0 2rem;
+}
+
+.foglia-divisore svg {
+  width: 55px;
+  height: 45px;
+}
+
+/* ===== ETICHETTA SEZIONE ===== */
+.sezione-label-row {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 0.6rem;
+}
+
+.sezione-label {
+  font-family: var(--font-corpo);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--oliva);
+}
+
+.sezione-bee {
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+/* ===== INTESTAZIONE SEZIONE CON LINK A DESTRA ===== */
+.sezione-header-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.sezione-header-row > div { flex: 1; }
+
+.link-vedi-tutti {
+  font-family: var(--font-corpo);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--testo);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  white-space: nowrap;
+  opacity: 0.65;
+  transition: opacity var(--transizione);
+  padding-bottom: 0.25rem;
+}
+
+.link-vedi-tutti:hover { opacity: 1; color: var(--testo); }
+
+/* ===== SEZIONE "IL MIO CAMPO" — SPLIT FOTO + TESTO ===== */
+.sezione-campo-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 480px;
+}
+
+.campo-split-foto {
+  overflow: hidden;
+}
+
+.campo-split-foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+}
+
+.campo-split-testo {
+  background-color: var(--verde-chiaro);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 4rem 8% 4rem 8%;
+}
+
+.campo-split-testo h2 {
+  margin-top: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.campo-split-testo p {
+  max-width: 36ch;
+}
+
+@media (max-width: 767px) {
+  .sezione-campo-split {
+    grid-template-columns: 1fr;
+  }
+  .campo-split-foto {
+    height: 260px;
+  }
+  .campo-split-testo {
+    padding: 2.5rem 6%;
+  }
+}
+
+/* ===== WORKSHOP LAYOUT 2 COLONNE ===== */
+.workshop-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .workshop-split {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.workshop-foto-col {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 1/1;
+}
+
+.workshop-foto-col img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.btn-salvia {
+  background-color: var(--oliva);
+  color: var(--crema);
+  border-color: var(--oliva);
+}
+
+.btn-salvia:hover {
+  background-color: var(--testo);
+  border-color: var(--testo);
+  color: var(--crema);
+}
+
+/* ===== BLOG CARD CON FOTO ===== */
+.blog-griglia {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.75rem;
+  margin-bottom: 2.5rem;
+}
+
+@media (min-width: 600px) {
+  .blog-griglia { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 900px) {
+  .blog-griglia { grid-template-columns: repeat(3, 1fr); }
+}
+
+.blog-card {
+  background-color: var(--crema);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(59, 65, 39, 0.08);
+  transition: transform var(--transizione), box-shadow var(--transizione);
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+}
+
+.blog-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(59, 65, 39, 0.14);
+}
+
+.blog-card-img {
+  width: 100%;
+  aspect-ratio: 16/10;
+  object-fit: cover;
+}
+
+.blog-card-body {
+  padding: 1.25rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.blog-card-titolo {
+  font-family: var(--font-titoli);
+  font-size: 1.2rem;
+  color: var(--testo);
+  line-height: 1.2;
+}
+
+.blog-card-testo {
+  font-size: 0.875rem;
+  color: var(--testo);
+  opacity: 0.78;
+  flex: 1;
+  line-height: 1.5;
+}
+
+.link-leggi {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--oliva);
+  text-decoration: none;
+  margin-top: 0.25rem;
+  transition: color var(--transizione);
+}
+
+.link-leggi:hover { color: var(--testo); }
+
+/* Icona ape nelle card prodotti */
+.card-bee {
+  font-size: 0.9rem;
+  margin-bottom: -0.25rem;
+}
+
+/* Foto Chi sono: cornicetta verde chiaro con padding crema */
+.chi-sono-foto-cornice {
+  display: block;
+  width: 100%;
+  border: 2.5px solid var(--verde-chiaro);
+  border-radius: 20px;
+  padding: 10px;
+  background-color: var(--verde-chiaro);
+  box-sizing: border-box;
+}
+
+.chi-sono-foto-img {
+  width: 100%;
+  border-radius: 14px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  border: none;
+}
+
+/* Label con trattino */
+.sezione-trattino {
+  display: inline-block;
+  color: var(--testo);
+  font-weight: 600;
+  margin-right: 0.4rem;
+  opacity: 0.5;
+}
+
+/* Link testo semplice (es. "La mia storia →") */
+.link-testo {
+  display: inline-block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--testo);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--oliva);
+  transition: color var(--transizione), text-decoration-color var(--transizione);
+  margin-top: 0.5rem;
+}
+
+.link-testo:hover {
+  color: var(--oliva);
+  text-decoration-color: var(--oliva);
 }
 
 /* ===== INFO CONTATTI ===== */
