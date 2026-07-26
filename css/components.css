@@ -1,4 +1,4 @@
-﻿/* ===================================================
+/* ===================================================
    COMPONENTS.CSS — Hero, card, bottoni, sezioni
    =================================================== */
 
@@ -86,21 +86,29 @@
   pointer-events: none;
 }
 
-/* Blocco testo — copre tutta la hero, kicker+titolo allineati a destra */
+/* Blocco testo — copre tutta la hero */
 .hero-velo {
   position: absolute;
   inset: 0;
-  max-width: 100%;
-  transform: none;
   z-index: 4;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   justify-content: center;
-  padding-right: 5%;
 }
 
-/* Proprietà condivise ragazza (nessuna dimensione — vanno nei breakpoint) */
+/* Testo principale: kicker + titolo + sottotitolo + bottone */
+.hero-testo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  padding-right: 5%;
+  max-width: 48%;
+  margin-left: auto;
+}
+
+/* Proprietà condivise ragazza */
 .hero-ragazza {
   display: block;
   pointer-events: none;
@@ -111,16 +119,12 @@
   flex-shrink: 0;
 }
 
-/* Desktop: ragazza alta come la hero, bottom-row assoluto in basso */
+/* Desktop: ragazza posizionata in basso a sinistra, hero-bottom-text nascosto */
 @media (min-width: 768px) {
   .hero-bottom-row {
     position: absolute;
     bottom: 0;
     left: 0;
-    right: 0;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
     z-index: 4;
   }
 
@@ -130,16 +134,9 @@
   }
 
   .hero-bottom-text {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    text-align: right;
-    padding-right: 5%;
-    padding-bottom: 2.5rem;
-    margin-left: auto;
+    display: none;
   }
 }
-
 
 .hero-kicker {
   font-family: var(--font-corpo);
@@ -183,15 +180,24 @@
     display: none;
   }
 
+  .hero-desktop-only {
+    display: none;
+  }
 
-  /* Testo: copre tutta la hero così bottom-row può ancorarsi in fondo */
   .hero-velo {
     inset: 0;
+    align-items: center;
+    justify-content: flex-start;
     padding-top: 80%;
     padding-left: 4%;
     padding-right: 4%;
-    align-items: flex-start;
-    justify-content: flex-start;
+  }
+
+  .hero-testo {
+    align-items: center;
+    text-align: center;
+    max-width: 100%;
+    padding-right: 0;
   }
 
   .hero-titolo-grande {
@@ -202,7 +208,6 @@
     width: 100%;
   }
 
-  /* hero-bottom-row: ancorata al fondo della hero */
   .hero-bottom-row {
     position: absolute;
     bottom: 0;
@@ -214,7 +219,6 @@
     gap: 12px;
   }
 
-  /* Ragazza: larghezza naturale, proporzionata */
   .hero-ragazza {
     width: 50%;
     height: auto;
@@ -222,14 +226,14 @@
     margin-left: -4%;
   }
 
-  /* Sottotitolo + bottone: centrati nella colonna destra */
   .hero-bottom-text {
     flex: 1;
+    display: flex;
+    flex-direction: column;
     align-items: center;
     text-align: center;
     padding-right: 4%;
     padding-bottom: 1.5rem;
-    margin-left: 0;
   }
 
   .hero-sottotitolo {
@@ -407,6 +411,22 @@
   padding: 5rem 0;
 }
 
+#prodotti.sezione {
+  padding-top: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  #prodotti.sezione {
+    padding-top: 5rem;
+  }
+}
+
+@media (max-width: 767px) {
+  #workshop.sezione {
+    padding-bottom: 1.5rem;
+  }
+}
+
 .sezione-sfondo-verde {
   background-color: var(--verde-chiaro);
 }
@@ -567,7 +587,7 @@
 .chi-sono-griglia {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 3rem;
+  gap: 2rem;
   align-items: center;
 }
 
@@ -579,9 +599,10 @@
 
 .chi-sono-foto {
   width: 100%;
+  max-width: 440px;
   border-radius: var(--radius-lg);
   aspect-ratio: 3/4;
-  object-fit: cover;
+  overflow: hidden;
   background: linear-gradient(160deg, var(--salvia), var(--verde-chiaro));
   display: flex;
   flex-direction: column;
@@ -590,6 +611,14 @@
   gap: 0.5rem;
   padding: 1rem;
   text-align: center;
+}
+
+.chi-sono-foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 80% 20%;
+  display: block;
 }
 
 .chi-sono-foto .foto-emoji {
@@ -622,7 +651,13 @@
 /* ===== DIVISORE CREMA CON FOGLIA ===== */
 .divisore-crema {
   background-color: var(--crema);
-  padding: 2.5rem 0;
+  padding: 2rem 0;
+}
+
+@media (max-width: 767px) {
+  .divisore-crema {
+    padding: 0.75rem 0;
+  }
 }
 
 /* ===== FOGLIOLINA DIVISORE TRA SEZIONI ===== */
@@ -630,12 +665,21 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0.5rem 0 2rem;
+  width: 100%;
+  padding: 4rem 0 2rem;
 }
 
 .foglia-divisore svg {
   width: 55px;
   height: 45px;
+}
+
+.foglia-workshop {
+  padding-top: 0.5rem;
+}
+
+.foglia-chisono {
+  padding-top: 0;
 }
 
 /* ===== ETICHETTA SEZIONE ===== */
@@ -739,7 +783,7 @@
 .workshop-split {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 3rem;
+  gap: 0.5rem;
   align-items: center;
 }
 
@@ -869,7 +913,7 @@
   border-radius: 14px;
   aspect-ratio: 1/1;
   object-fit: cover;
-  object-position: center top;
+  object-position: 80% 20%;
   display: block;
   border: none;
 }

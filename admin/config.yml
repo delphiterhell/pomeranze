@@ -1,0 +1,27 @@
+backend:
+  name: git-gateway
+  branch: master
+
+media_folder: "images"
+public_folder: "/images"
+
+locale: it
+
+collections:
+  - name: "blog"
+    label: "Articoli"
+    folder: "content/blog"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Titolo", name: "title", widget: "string" }
+      - { label: "Data", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false }
+      - { label: "Immagine di copertina", name: "coverImage", widget: "image", required: false }
+      - { label: "Estratto / Anteprima", name: "excerpt", widget: "text", hint: "Breve descrizione mostrata nella lista del blog (1-2 frasi)" }
+      - label: "Categoria"
+        name: "tags"
+        widget: "select"
+        multiple: true
+        options: ["Consigli", "Coltivazione", "Vita nel campo", "Stagioni", "Natura", "Workshop"]
+      - { label: "Testo dell'articolo", name: "body", widget: "markdown" }
+      - { label: "Layout", name: "layout", widget: "hidden", default: "post.njk" }

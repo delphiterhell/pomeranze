@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{{ description or 'Pomeranze – Fiori di campo coltivati con cura.' }}">
+  <title>{{ title }} – Pomeranze</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barrio&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+
+  {% block head %}{% endblock %}
+</head>
+<body>
+
+  <header class="site-header fisso" role="banner">
+    <div class="container header-inner">
+      <a href="/index.html" class="logo-nome" aria-label="Pomeranze – torna alla home">
+        <img src="/images/logodef.png" alt="Pomeranze" class="logo-img">
+        <span class="logo-testo">Pomeranze</span>
+      </a>
+      <button class="hamburger" aria-controls="navigazione-principale"
+              aria-expanded="false" aria-label="Apri menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="site-nav" id="navigazione-principale" aria-label="Navigazione principale">
+        <a href="/index.html">Home</a>
+        <a href="/chi-sono.html">Chi sono</a>
+        <a href="/prodotti.html">Prodotti</a>
+        <a href="/workshop.html">Workshop</a>
+        <a href="/blog.html" class="attivo">Blog</a>
+        <a href="/contatti.html">Contatti</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="pagina-main">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a href="/index.html" class="logo-nome">Pomeranze</a>
+          <p>Fiori di campo coltivati con cura,<br>direttamente dalla terra alla tua tavola.</p>
+        </div>
+        <nav class="footer-nav" aria-label="Navigazione footer">
+          <h3>Pagine</h3>
+          <a href="/chi-sono.html">Chi sono</a>
+          <a href="/prodotti.html">Prodotti</a>
+          <a href="/workshop.html">Workshop</a>
+          <a href="/blog.html">Blog</a>
+          <a href="/contatti.html">Contatti</a>
+        </nav>
+        <div class="footer-social">
+          <h3>Seguimi</h3>
+          <ul>
+            <li><a href="#" aria-label="Instagram di Clelia">Instagram</a></li>
+            <li><a href="#" aria-label="Facebook di Clelia">Facebook</a></li>
+            <li><a href="#" aria-label="LinkedIn di Clelia">LinkedIn</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-bottom">© <span id="anno"></span> Pomeranze – Fiori di campo. Con amore dalla campagna.</p>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+  <script>document.getElementById('anno').textContent = new Date().getFullYear();</script>
+
+</body>
+</html>

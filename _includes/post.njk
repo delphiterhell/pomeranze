@@ -1,0 +1,96 @@
+{% extends "base.njk" %}
+
+{% block head %}
+<style>
+  .post-hero {
+    background-color: var(--verde-chiaro);
+    padding: 4rem 0 3rem;
+  }
+  .post-hero .container {
+    max-width: 760px;
+  }
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+  }
+  .post-titolo {
+    font-family: var(--font-titoli);
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    line-height: 1.05;
+    color: var(--testo);
+    margin-bottom: 1rem;
+  }
+  .post-excerpt {
+    font-size: 1.1rem;
+    opacity: 0.85;
+    max-width: 60ch;
+    line-height: 1.6;
+  }
+  .post-cover {
+    width: 100%;
+    max-height: 480px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+  .post-corpo {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 3rem 1.25rem 4rem;
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--testo);
+  }
+  .post-corpo h2 { margin: 2.5rem 0 0.75rem; font-size: clamp(1.4rem, 3vw, 2rem); }
+  .post-corpo h3 { margin: 2rem 0 0.5rem; font-size: clamp(1.1rem, 2.5vw, 1.5rem); }
+  .post-corpo p { margin-bottom: 1.4rem; max-width: none; }
+  .post-corpo ul, .post-corpo ol { padding-left: 1.5rem; margin-bottom: 1.4rem; }
+  .post-corpo li { margin-bottom: 0.4rem; }
+  .post-corpo img { border-radius: var(--radius-lg); margin: 1.5rem 0; max-width: 100%; }
+  .post-corpo blockquote {
+    border-left: 3px solid var(--salvia);
+    padding-left: 1.25rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+    opacity: 0.8;
+  }
+  .post-back {
+    display: inline-block;
+    margin: 0 0 2rem;
+    font-size: 0.9rem;
+    color: var(--testo);
+    opacity: 0.7;
+    text-decoration: none;
+  }
+  .post-back:hover { opacity: 1; }
+</style>
+{% endblock %}
+
+{% block content %}
+
+  <section class="post-hero">
+    <div class="container">
+      <a href="/blog.html" class="post-back">← Torna al blog</a>
+      <div class="post-meta">
+        {% if tags and tags | length %}
+          <span class="tag">{{ tags[0] }}</span>
+        {% endif %}
+        <span class="card-data">{{ date | dataItaliana }}</span>
+      </div>
+      <h1 class="post-titolo">{{ title }}</h1>
+      {% if excerpt %}<p class="post-excerpt">{{ excerpt }}</p>{% endif %}
+    </div>
+  </section>
+
+  {% if coverImage %}
+    <img src="{{ coverImage }}" alt="{{ title }}" class="post-cover">
+  {% endif %}
+
+  <article class="post-corpo">
+    {{ content | safe }}
+  </article>
+
+{% endblock %}

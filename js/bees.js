@@ -60,6 +60,8 @@
         { startX: 30, startY: 55, animazione: 'vola-2', durata: '12s', ritardo: '-3s', dimensione: '32px' },
         { startX: 48, startY: 30, animazione: 'vola-3', durata: '10s', ritardo: '-6s', dimensione: '36px' },
         { startX: 18, startY: 68, animazione: 'vola-4', durata: '14s', ritardo: '-2s', dimensione: '30px' },
+        { startX: 48, startY: 30, animazione: 'vola-5', durata: '10s', ritardo: '-6s', dimensione: '36px' },
+        { startX: 80, startY: 78, animazione: 'vola-6', durata: '10s', ritardo: '-2s', dimensione: '30px' },
       ];
 
   /* ---------- Creazione delle api nel DOM ---------- */
