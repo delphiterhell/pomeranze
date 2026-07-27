@@ -86,7 +86,7 @@
   </section>
 
   {% if coverImage %}
-    <img src="{{ coverImage }}" alt="{{ title }}" class="post-cover">
+    <img src="{{ coverImage | imgCDN(1600) }}" alt="{{ title }}" class="post-cover">
   {% endif %}
 
   <article class="post-corpo">

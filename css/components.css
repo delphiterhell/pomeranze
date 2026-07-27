@@ -186,18 +186,22 @@
 
   .hero-velo {
     inset: 0;
-    align-items: center;
-    justify-content: flex-start;
-    padding-top: 80%;
-    padding-left: 4%;
-    padding-right: 4%;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    padding: 0;
   }
 
   .hero-testo {
+    position: absolute;
+    top: 38%;
+    left: 4%;
+    right: 4%;
+    transform: translateY(-50%);
     align-items: center;
     text-align: center;
     max-width: 100%;
-    padding-right: 0;
+    padding: 0;
   }
 
   .hero-titolo-grande {
@@ -422,6 +426,30 @@
 }
 
 @media (max-width: 767px) {
+  .sezione {
+    padding: 2.5rem 0;
+  }
+
+  .sezione-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .sezione-sfondo-verde:first-of-type .sezione-header,
+  .pagina-main > section:first-child .sezione-header {
+    margin-bottom: 0;
+  }
+
+  .pagina-main > section:first-child {
+    padding: 1.5rem 0;
+  }
+
+  .chi-sono-foto {
+    aspect-ratio: 1 / 1;
+    max-width: 100%;
+    max-height: 72vw;
+    margin-bottom: 1.5rem;
+  }
+
   #workshop.sezione {
     padding-bottom: 1.5rem;
   }
@@ -666,7 +694,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 4rem 0 2rem;
+  padding: 4rem 0 0.5rem;
 }
 
 .foglia-divisore svg {

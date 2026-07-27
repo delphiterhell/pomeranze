@@ -1,0 +1,105 @@
+---
+layout: base.njk
+title: Workshop
+description: Workshop e laboratori floreali con Clelia nel campo.
+permalink: /workshop.html
+activeNav: workshop
+---
+
+{% block head %}
+<style>
+  .workshop-item {
+    background-color: var(--crema);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .workshop-data {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--oliva);
+  }
+  .workshop-item h3 {
+    font-family: var(--font-titoli);
+    font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+    margin-bottom: 0;
+  }
+  .workshop-item p { margin-bottom: 0; }
+  .workshop-posti {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--oliva);
+  }
+  .workshop-posti.lista-attesa { color: var(--terracotta); }
+  .workshop-item .btn { align-self: flex-start; margin-top: 0.5rem; }
+</style>
+{% endblock %}
+
+{% block content %}
+
+  <section class="sezione sezione-sfondo-verde" aria-labelledby="titolo-workshop">
+    <div class="container">
+      <div class="sezione-header rivela">
+        <h1 id="titolo-workshop">Workshop</h1>
+        <p>Piccoli gruppi, mani nella terra e tanta creatività. I laboratori si tengono direttamente nel campo o nel fienile attiguo, a seconda del tempo.</p>
+      </div>
+    </div>
+  </section>
+
+  {% set stagioni = [] %}
+  {% for w in collections.workshop %}
+    {% if w.data.stagione not in stagioni %}
+      {% set stagioni = stagioni.concat([w.data.stagione]) %}
+    {% endif %}
+  {% endfor %}
+
+  {% for stagione in stagioni %}
+  <section class="sezione sezione-sfondo-bianco" aria-labelledby="titolo-{{ stagione | slug }}">
+    <div class="container">
+      <div class="sezione-header rivela">
+        <h2 id="titolo-{{ stagione | slug }}">{{ stagione }}</h2>
+      </div>
+      <div class="griglia-2">
+        {% for w in collections.workshop %}
+          {% if w.data.stagione == stagione %}
+          <div class="workshop-item rivela">
+            <span class="workshop-data">{{ w.date | dataItaliana }}{% if w.data.orario != "da definire" %} · ore {{ w.data.orario }}{% else %} · data da definire{% endif %}</span>
+            <h3>{{ w.data.title }}</h3>
+            <p>{{ w.content | safe }}</p>
+            <p><strong>Costo:</strong> {{ w.data.costo }} · Materiali inclusi · Max {{ w.data.maxPartecipanti }} partecipanti</p>
+            {% if w.data.stato == "disponibile" %}
+              <span class="workshop-posti">Posti rimasti: {{ w.data.postiRimasti }}</span>
+              <a href="/contatti.html" class="btn btn-accento btn-piccolo">Iscriviti →</a>
+            {% else %}
+              <span class="workshop-posti lista-attesa">Lista d'attesa aperta</span>
+              <a href="/contatti.html" class="btn btn-outline btn-piccolo">Mettimi in lista →</a>
+            {% endif %}
+          </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+  {% endfor %}
+
+  <section class="sezione sezione-sfondo-verde" aria-labelledby="titolo-privati">
+    <div class="container">
+      <div class="chi-sono-griglia">
+        <div>
+          <h2 class="rivela" id="titolo-privati">Workshop privati e aziendali</h2>
+          <p class="rivela">Organizzo anche laboratori su misura: addii al nubilato, team building aziendali, feste di compleanno o semplici pomeriggi tra amiche. Il campo è disponibile per gruppi da 6 a 20 persone.</p>
+          <p class="rivela">Posso strutturare un percorso personalizzato in base alla stagione, al budget e al tipo di esperienza che vuoi offrire.</p>
+          <a href="/contatti.html" class="btn btn-accento rivela">Scrivimi per un preventivo →</a>
+        </div>
+        <div class="chi-sono-foto rivela">
+          <img src="{{ '/images/workshop.webp' | imgCDN(800) }}" alt="Clelia nel campo tra i fiori">
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock %}

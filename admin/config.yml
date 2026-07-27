@@ -8,6 +8,32 @@ public_folder: "/images"
 locale: it
 
 collections:
+  - name: "workshop"
+    label: "Workshop"
+    folder: "content/workshop"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Titolo", name: "title", widget: "string" }
+      - { label: "Data", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false }
+      - { label: "Orario", name: "orario", widget: "string", hint: "Es. 10:00–13:00 oppure 'da definire'" }
+      - { label: "Costo", name: "costo", widget: "string", hint: "Es. 45 €" }
+      - { label: "Max partecipanti", name: "maxPartecipanti", widget: "number" }
+      - { label: "Posti rimasti", name: "postiRimasti", widget: "number", default: 0 }
+      - label: "Stato"
+        name: "stato"
+        widget: "select"
+        options:
+          - { label: "Disponibile", value: "disponibile" }
+          - { label: "Lista d'attesa", value: "lista-attesa" }
+          - { label: "Sold out", value: "sold-out" }
+      - label: "Stagione"
+        name: "stagione"
+        widget: "select"
+        options: ["Estate 2025", "Autunno 2025", "Inverno 2025", "Primavera 2026"]
+      - { label: "Descrizione", name: "body", widget: "markdown" }
+      - { label: "Layout", name: "layout", widget: "hidden", default: "base.njk" }
+
   - name: "blog"
     label: "Articoli"
     folder: "content/blog"

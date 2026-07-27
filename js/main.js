@@ -16,6 +16,16 @@ document.addEventListener('DOMContentLoaded', () => {
       document.body.style.overflow = aperto ? '' : 'hidden';
     });
 
+    // Chiude il menu con il pulsante ✕
+    const navChiudi = nav.querySelector('.nav-chiudi');
+    if (navChiudi) {
+      navChiudi.addEventListener('click', () => {
+        hamburger.setAttribute('aria-expanded', 'false');
+        nav.classList.remove('aperto');
+        document.body.style.overflow = '';
+      });
+    }
+
     // Chiude il menu al click su un link
     nav.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {

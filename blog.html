@@ -93,6 +93,61 @@
       flex-wrap: wrap;
       gap: 0.5rem;
     }
+
+    /* Modal articolo */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(44, 49, 39, 0.6);
+      z-index: 200;
+      padding: 1rem;
+      overflow-y: auto;
+    }
+    .modal-overlay.aperto { display: flex; align-items: flex-start; justify-content: center; }
+    .modal-box {
+      background: var(--crema);
+      border-radius: var(--radius-lg);
+      max-width: 680px;
+      width: 100%;
+      margin: 2rem auto;
+      overflow: hidden;
+      position: relative;
+    }
+    .modal-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      display: block;
+    }
+    .modal-corpo {
+      padding: 2rem 2rem 2.5rem;
+    }
+    .modal-chiudi {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: var(--crema);
+      border: none;
+      border-radius: 50%;
+      width: 2.2rem;
+      height: 2.2rem;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      opacity: 0.85;
+    }
+    .modal-chiudi:hover { opacity: 1; }
+    .modal-corpo h2 { font-family: var(--font-titoli); font-size: clamp(1.5rem, 4vw, 2rem); margin-bottom: 0.5rem; }
+    .modal-corpo .tag { margin-bottom: 1rem; display: inline-block; }
+    .modal-corpo p { margin-bottom: 1rem; line-height: 1.7; font-size: 0.95rem; }
+    .modal-corpo h3 { font-family: var(--font-titoli); font-size: 1.2rem; margin: 1.5rem 0 0.5rem; }
+    .modal-corpo ul, .modal-corpo ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+    .modal-corpo li { margin-bottom: 0.4rem; font-size: 0.95rem; line-height: 1.6; }
+    .modal-corpo strong { font-weight: 700; }
   </style>
 </head>
 <body>
@@ -105,6 +160,7 @@
         <span></span><span></span><span></span>
       </button>
       <nav class="site-nav" id="navigazione-principale" aria-label="Navigazione principale">
+        <button class="nav-chiudi" aria-label="Chiudi menu">✕</button>
         <a href="index.html">Home</a>
         <a href="chi-sono.html">Chi sono</a>
         <a href="prodotti.html">Prodotti</a>
@@ -128,89 +184,96 @@
 
     <section class="sezione sezione-sfondo-bianco" aria-label="Articoli del blog">
       <div class="container">
-        <div class="articoli-lista">
+        <div class="blog-griglia">
 
-          <article class="articolo-card rivela">
-            <div class="articolo-card-img" role="img" aria-label="Vaso di fiori in acqua">🌺</div>
-            <div class="articolo-card-corpo">
-              <div>
-                <span class="tag">Consigli</span>
-                <span class="card-data" style="margin-left: 0.5rem;">3 giugno 2025</span>
-              </div>
-              <h2><a href="#">Come far durare i fiori recisi più a lungo</a></h2>
-              <p>Cambio l'acqua ogni giorno, taglio i gambi in diagonale sotto l'acqua corrente e tengo i vasi lontano dal sole diretto. Sembra poco, ma è già il novanta per cento del lavoro. In questo articolo vi racconto anche qualche trucco meno noto — come usare l'aspirina, il bicarbonato o una moneta di rame — e vi dico onestamente quali funzionano davvero.</p>
-              <div class="articolo-card-footer">
-                <span style="font-size:0.85rem; opacity:0.6;">5 min di lettura</span>
-                <a href="#" class="btn btn-outline btn-piccolo">Leggi tutto →</a>
-              </div>
+          <article class="blog-card rivela">
+            <img src="images/articolouno.webp" alt="Come far durare i fiori recisi" class="blog-card-img">
+            <div class="blog-card-body">
+              <span class="tag">Consigli</span>
+              <h3 class="blog-card-titolo">Come far durare i fiori recisi più a lungo</h3>
+              <p class="blog-card-testo">Piccoli trucchi che uso ogni giorno per tenere i bouquet freschi per una settimana intera.</p>
+              <a href="#" class="link-leggi apri-modal" data-modal="articolo-1">Leggi →</a>
             </div>
           </article>
 
-          <article class="articolo-card rivela">
-            <div class="articolo-card-img" role="img" aria-label="Semenzali in vasetti di terra">🌱</div>
-            <div class="articolo-card-corpo">
-              <div>
-                <span class="tag">Coltivazione</span>
-                <span class="card-data" style="margin-left: 0.5rem;">18 maggio 2025</span>
-              </div>
-              <h2><a href="#">I fiori da seminare adesso per avere colore tutta estate</a></h2>
-              <p>Se siete partite tardi con le semine (come capita a me ogni anno, nonostante le buone intenzioni di marzo) non disperate. Ci sono specie che fanno ancora in tempo: zinnie, girasoli, cosmos e tagetes germogliano in una settimana e iniziano a fiorire in quattro-sei settimane. Vi racconto i miei preferiti e come non sbagliare i sesti di impianto.</p>
-              <div class="articolo-card-footer">
-                <span style="font-size:0.85rem; opacity:0.6;">7 min di lettura</span>
-                <a href="#" class="btn btn-outline btn-piccolo">Leggi tutto →</a>
-              </div>
+          <article class="blog-card rivela">
+            <img src="images/articolodue.webp" alt="I fiori da seminare adesso" class="blog-card-img">
+            <div class="blog-card-body">
+              <span class="tag">Coltivazione</span>
+              <h3 class="blog-card-titolo">I fiori da seminare adesso per avere colore tutta estate</h3>
+              <p class="blog-card-testo">Zinnie, girasoli, cosmos: la mia lista dei semenzali preferiti e quando piantarli.</p>
+              <a href="#" class="link-leggi apri-modal" data-modal="articolo-2">Leggi →</a>
             </div>
           </article>
 
-          <article class="articolo-card rivela">
-            <div class="articolo-card-img" role="img" aria-label="Alba sul campo di fiori">☀️</div>
-            <div class="articolo-card-corpo">
-              <div>
-                <span class="tag">Vita nel campo</span>
-                <span class="card-data" style="margin-left: 0.5rem;">2 maggio 2025</span>
-              </div>
-              <h2><a href="#">Com'è una giornata nel mio campo</a></h2>
-              <p>Mi sveglio alle sei. Non perché sia una mattiniera di natura — ci ho messo anni — ma perché i fiori vanno raccolti prima che il sole sia alto e inizi a chiuderli. Vi racconto come scorre una giornata tipo: dalla raccolta agli ordini, dal diserbo ai messaggi di Instagram, fino alla sera quando mi siedo sul bordo del campo e guardo le api che tornano all'alveare.</p>
-              <div class="articolo-card-footer">
-                <span style="font-size:0.85rem; opacity:0.6;">6 min di lettura</span>
-                <a href="#" class="btn btn-outline btn-piccolo">Leggi tutto →</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="articolo-card rivela">
-            <div class="articolo-card-img" role="img" aria-label="Api sui fiori">🐝</div>
-            <div class="articolo-card-corpo">
-              <div>
-                <span class="tag">Natura</span>
-                <span class="card-data" style="margin-left: 0.5rem;">14 aprile 2025</span>
-              </div>
-              <h2><a href="#">Perché ho smesso di usare qualsiasi pesticida (e non me ne pento)</a></h2>
-              <p>Il primo anno ho perso metà delle zucchine alle afidi. Ho resistito, ho aspettato, e poi è arrivata un'invasione di coccinelle che ha risolto tutto da sola. Da allora faccio coltivazione biologica per scelta, non per certificazione. Vi racconto cosa ho imparato sulla gestione degli insetti nel campo floreale e perché la biodiversità è la migliore alleata del coltivatore.</p>
-              <div class="articolo-card-footer">
-                <span style="font-size:0.85rem; opacity:0.6;">8 min di lettura</span>
-                <a href="#" class="btn btn-outline btn-piccolo">Leggi tutto →</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="articolo-card rivela">
-            <div class="articolo-card-img" role="img" aria-label="Peonie in boccio">🌸</div>
-            <div class="articolo-card-corpo">
-              <div>
-                <span class="tag">Stagioni</span>
-                <span class="card-data" style="margin-left: 0.5rem;">28 marzo 2025</span>
-              </div>
-              <h2><a href="#">Il mese delle peonie: tutto quello che non sapevo quando ho iniziato</a></h2>
-              <p>Le peonie si piantano in autunno, fioriscono a maggio per tre settimane e poi spariscono fino all'anno dopo. Un investimento a lunghissimo termine — le radici migliorano con gli anni e le piante vivono decenni. Il mio primo anno non ne ho avuta una sola. Il secondo anno, quattro. Adesso ne ho una sessantina e ogni maggio è una meraviglia che devo ancora ricordarmi di fotografare prima di venderle tutte.</p>
-              <div class="articolo-card-footer">
-                <span style="font-size:0.85rem; opacity:0.6;">5 min di lettura</span>
-                <a href="#" class="btn btn-outline btn-piccolo">Leggi tutto →</a>
-              </div>
+          <article class="blog-card rivela">
+            <img src="images/articolotre.webp" alt="Una giornata nel campo" class="blog-card-img">
+            <div class="blog-card-body">
+              <span class="tag">Vita nel campo</span>
+              <h3 class="blog-card-titolo">Com'è una giornata nel mio campo</h3>
+              <p class="blog-card-testo">Dalle sei del mattino al tramonto: la mia routine quotidiana tra annaffiature, raccolte e ordini.</p>
+              <a href="#" class="link-leggi apri-modal" data-modal="articolo-3">Leggi →</a>
             </div>
           </article>
 
         </div>
+
+        <!-- Contenuto nascosto degli articoli -->
+        <template id="articolo-1">
+          <img src="images/articolouno.webp" alt="Come far durare i fiori recisi" class="modal-img">
+          <div class="modal-corpo">
+            <span class="tag">Consigli</span>
+            <h2>Come far durare i fiori recisi più a lungo</h2>
+            <p>Cambio l'acqua ogni giorno, taglio i gambi in diagonale sotto l'acqua corrente e tengo i vasi lontano dal sole diretto. Sembra poco, ma è già il novanta per cento del lavoro.</p>
+            <h3>Il taglio giusto fa la differenza</h3>
+            <p>Tagliare il gambo in diagonale aumenta la superficie di contatto con l'acqua. Fallo sempre sotto l'acqua corrente, così eviti che l'aria entri nei vasi conduttori — una bolla d'aria può bloccare completamente l'assorbimento.</p>
+            <h3>L'acqua: cambiarla conta più di quanto pensi</h3>
+            <p>L'acqua stagnante è il nemico principale. I batteri si moltiplicano e ostruiscono i gambi. Cambio l'acqua ogni mattina e ogni volta che la vedo torbida. Se non ho tempo, almeno aggiungo qualche goccia di candeggina diluita (una goccia per litro).</p>
+            <h3>Trucchi meno noti</h3>
+            <ul>
+              <li><strong>Aspirina</strong>: una compressa sciolta nell'acqua abbassa il pH e rallenta la crescita batterica. Funziona davvero.</li>
+              <li><strong>Moneta di rame</strong>: la zia di mia madre giurava su questo. La scienza la supporta — lo ione rame è antibatterico.</li>
+              <li><strong>Zucchero</strong>: nutre i fiori ma nutre anche i batteri. Usatelo solo con un disinfettante.</li>
+            </ul>
+            <h3>Dove posizionare il vaso</h3>
+            <p>Lontano dal sole diretto, dalla frutta matura (rilascia etilene che accelera l'invecchiamento), e dal calore dei caloriferi. Un posto fresco, possibilmente con buona ventilazione.</p>
+          </div>
+        </template>
+
+        <template id="articolo-2">
+          <img src="images/articolodue.webp" alt="I fiori da seminare adesso" class="modal-img">
+          <div class="modal-corpo">
+            <span class="tag">Coltivazione</span>
+            <h2>I fiori da seminare adesso per avere colore tutta estate</h2>
+            <p>Se siete partite tardi con le semine (come capita a me ogni anno, nonostante le buone intenzioni di marzo) non disperate. Ci sono specie che fanno ancora in tempo.</p>
+            <h3>Le mie preferite per le semine tardive</h3>
+            <p><strong>Zinnie</strong> — germogliano in 5-7 giorni, fioriscono in 6-8 settimane. Colori vivacissimi, resistenti al caldo, perfette per mazzi lunghi. Sono la mia specie preferita in assoluto.</p>
+            <p><strong>Girasoli</strong> — crescita rapidissima. I girasoli nani fioriscono già a 7 settimane dalla semina. I giganti ci mettono di più ma lo spettacolo vale l'attesa.</p>
+            <p><strong>Cosmos</strong> — leggeri, ariosi, sembrano selvatici anche quando crescono in fila. Resistono bene alla siccità e continuano a fiorire se li si recide regolarmente.</p>
+            <p><strong>Tagetes</strong> — spesso sottovalutato. Colori intensi, resistenza notevole, e tiene lontani alcuni parassiti. Non è glamour ma fa il suo lavoro.</p>
+            <h3>Come non sbagliare i sesti di impianto</h3>
+            <p>Distanza tra piante: zinnie 25-30 cm, girasoli almeno 30 cm (i giganti 50 cm), cosmos 20-25 cm, tagetes 15-20 cm.</p>
+            <p>Semina direttamente in terra quando le temperature notturne sono stabili sopra i 12°C. Se partite con semenzai al chiuso, trapiantate quando le piantine hanno almeno 3-4 foglie vere.</p>
+          </div>
+        </template>
+
+        <template id="articolo-3">
+          <img src="images/articolotre.webp" alt="Una giornata nel campo" class="modal-img">
+          <div class="modal-corpo">
+            <span class="tag">Vita nel campo</span>
+            <h2>Com'è una giornata nel mio campo</h2>
+            <p>Mi sveglio alle sei. Non perché sia una mattiniera di natura — ci ho messo anni — ma perché i fiori vanno raccolti prima che il sole sia alto e inizi a chiuderli.</p>
+            <h3>La raccolta del mattino</h3>
+            <p>Esco in campo con i secchi pieni d'acqua e le cesoie. Taglio i fiori ancora in boccio o appena aperti — si conservano molto meglio così — e li metto subito in acqua. Le zinnie vengono prima, poi i girasoli, poi tutto il resto.</p>
+            <p>La raccolta dura circa due ore. Al rientro metto i fiori in condizionamento in un posto fresco e buio per almeno quattro ore prima di fare i mazzi.</p>
+            <h3>La mattinata: ordini e burocrazia</h3>
+            <p>Mentre i fiori riposano, rispondo ai messaggi, preparo le fatture, aggiorno il sito. È la parte del lavoro che amo meno, ma è necessaria.</p>
+            <h3>Il pomeriggio: i mazzi</h3>
+            <p>Fare i mazzi è la parte che preferisco. Ogni mazzo è diverso — segue la stagione, i colori che ho quel giorno, l'umore. Non ho un protocollo fisso, solo un occhio allenato a cercare equilibrio tra texture, colore e altezza.</p>
+            <h3>La sera</h3>
+            <p>Mi siedo sul bordo del campo quando le luci si abbassano. Le api tornano all'alveare. Il campo si quieta. È per queste mezz'ore che faccio tutto il resto.</p>
+          </div>
+        </template>
       </div>
     </section>
 
@@ -244,8 +307,42 @@
     </div>
   </footer>
 
+  <!-- Modal articolo -->
+  <div class="modal-overlay" id="modal-articolo" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <button class="modal-chiudi" id="modal-chiudi" aria-label="Chiudi">✕</button>
+      <div id="modal-contenuto"></div>
+    </div>
+  </div>
+
   <script src="js/main.js"></script>
-  <script>document.getElementById('anno').textContent = new Date().getFullYear();</script>
+  <script>
+    document.getElementById('anno').textContent = new Date().getFullYear();
+
+    const overlay = document.getElementById('modal-articolo');
+    const contenuto = document.getElementById('modal-contenuto');
+
+    document.querySelectorAll('.apri-modal').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.preventDefault();
+        const tpl = document.getElementById(btn.dataset.modal);
+        if (!tpl) return;
+        contenuto.innerHTML = '';
+        contenuto.appendChild(tpl.content.cloneNode(true));
+        overlay.classList.add('aperto');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    function chiudiModal() {
+      overlay.classList.remove('aperto');
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('modal-chiudi').addEventListener('click', chiudiModal);
+    overlay.addEventListener('click', e => { if (e.target === overlay) chiudiModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') chiudiModal(); });
+  </script>
 
 </body>
 </html>

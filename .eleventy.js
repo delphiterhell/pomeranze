@@ -10,8 +10,16 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("index.html");
   eleventyConfig.addPassthroughCopy("chi-sono.html");
   eleventyConfig.addPassthroughCopy("prodotti.html");
-  eleventyConfig.addPassthroughCopy("workshop.html");
   eleventyConfig.addPassthroughCopy("contatti.html");
+
+  // Filtro Netlify Image CDN: CDN su Netlify, path diretto in locale
+  eleventyConfig.addFilter("imgCDN", function (src, width = 1600, quality = 82) {
+    if (!src) return src;
+    if (process.env.NETLIFY) {
+      return `/.netlify/images?url=${encodeURIComponent(src)}&w=${width}&q=${quality}&fm=webp`;
+    }
+    return src;
+  });
 
   // Filtro data in italiano
   eleventyConfig.addFilter("dataItaliana", function (date) {
@@ -28,6 +36,13 @@ module.exports = function (eleventyConfig) {
     return collectionApi
       .getFilteredByGlob("content/blog/*.md")
       .sort((a, b) => b.date - a.date);
+  });
+
+  // Ordina workshop per data
+  eleventyConfig.addCollection("workshop", function (collectionApi) {
+    return collectionApi
+      .getFilteredByGlob("content/workshop/*.md")
+      .sort((a, b) => a.date - b.date);
   });
 
   return {
