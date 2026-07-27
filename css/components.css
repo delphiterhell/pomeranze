@@ -679,7 +679,7 @@
 /* ===== DIVISORE CREMA CON FOGLIA ===== */
 .divisore-crema {
   background-color: var(--crema);
-  padding: 2rem 0;
+  padding: 1rem 0;
 }
 
 @media (max-width: 767px) {
@@ -694,12 +694,18 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 4rem 0 0.5rem;
+  padding: 1.25rem 0;
+  margin-bottom: 2rem;
 }
 
 .foglia-divisore svg {
   width: 55px;
   height: 45px;
+}
+
+.divisore-crema .foglia-divisore,
+.foglia-bottom {
+  margin-bottom: 0;
 }
 
 .foglia-workshop {
@@ -708,6 +714,13 @@
 
 .foglia-chisono {
   padding-top: 0;
+}
+
+@media (max-width: 767px) {
+  .foglia-divisore {
+    padding: 0.75rem 0;
+    margin-bottom: 1rem;
+  }
 }
 
 /* ===== ETICHETTA SEZIONE ===== */

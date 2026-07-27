@@ -41,7 +41,7 @@
   </header>
 
   <main class="pagina-main">
-    {% block content %}{% endblock %}
+    {{ content | safe }}
   </main>
 
   <footer class="site-footer" role="contentinfo">

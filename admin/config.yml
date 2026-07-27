@@ -30,7 +30,17 @@ collections:
       - label: "Stagione"
         name: "stagione"
         widget: "select"
-        options: ["Estate 2025", "Autunno 2025", "Inverno 2025", "Primavera 2026"]
+        options:
+          - "Estate 2025"
+          - "Autunno 2025"
+          - "Inverno 2025-2026"
+          - "Primavera 2026"
+          - "Estate 2026"
+          - "Autunno 2026"
+          - "Inverno 2026-2027"
+          - "Primavera 2027"
+          - "Estate 2027"
+          - "Autunno 2027"
       - { label: "Descrizione", name: "body", widget: "markdown" }
       - { label: "Layout", name: "layout", widget: "hidden", default: "base.njk" }
 
