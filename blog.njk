@@ -31,9 +31,9 @@ activeNav: blog
               {% endif %}
               <span style="font-size:0.75rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--oliva);opacity:0.7;">{{ post.date | dataItaliana }}</span>
             </div>
-            <h2 class="blog-card-titolo"><a href="{{ post.url }}" style="color:inherit;text-decoration:none;">{{ post.data.title }}</a></h2>
+            <h2 class="blog-card-titolo"><a href="{{ post.url }}" class="apri-articolo" style="color:inherit;text-decoration:none;">{{ post.data.title }}</a></h2>
             {% if post.data.excerpt %}<p class="blog-card-testo">{{ post.data.excerpt }}</p>{% endif %}
-            <a href="{{ post.url }}" class="link-leggi">Leggi →</a>
+            <a href="{{ post.url }}" class="link-leggi apri-articolo">Leggi →</a>
           </div>
         </article>
         {% else %}
@@ -43,4 +43,90 @@ activeNav: blog
 
     </div>
   </section>
+
+  <!-- Modal articolo -->
+  <div class="modal-overlay" id="modal-blog" role="dialog" aria-modal="true" aria-label="Articolo">
+    <div class="modal-box">
+      <button class="modal-chiudi" aria-label="Chiudi">✕</button>
+      <div class="modal-contenuto" id="modal-contenuto"></div>
+    </div>
+  </div>
+
+  <style>
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      z-index: 1000;
+      overflow-y: auto;
+      padding: 2rem 1rem;
+    }
+    .modal-overlay.aperto { display: flex; align-items: flex-start; justify-content: center; }
+    .modal-box {
+      background: var(--crema);
+      border-radius: var(--radius-lg);
+      max-width: 760px;
+      width: 100%;
+      padding: 2.5rem 2rem 3rem;
+      position: relative;
+    }
+    .modal-chiudi {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: var(--testo);
+      opacity: 0.5;
+      line-height: 1;
+    }
+    .modal-chiudi:hover { opacity: 1; }
+    .modal-contenuto img { max-width: 100%; border-radius: var(--radius-lg); margin: 1rem 0; }
+    .modal-contenuto h1 { font-family: var(--font-titoli); font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: 1rem; }
+    .modal-contenuto h2 { margin: 2rem 0 0.75rem; }
+    .modal-contenuto p { margin-bottom: 1.25rem; line-height: 1.75; }
+    .modal-contenuto .post-back { display: none; }
+    .modal-contenuto .post-hero { background: none; padding: 0; }
+    .modal-contenuto .post-hero .container { padding: 0; max-width: none; }
+    .modal-contenuto .post-corpo { padding: 1.5rem 0 0; }
+    .modal-contenuto .post-cover { border-radius: var(--radius-lg); margin: 1rem 0; }
+  </style>
+
+  <script>
+    (function() {
+      const overlay = document.getElementById('modal-blog');
+      const contenuto = document.getElementById('modal-contenuto');
+
+      document.querySelectorAll('.apri-articolo').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          var url = link.getAttribute('href');
+          fetch(url)
+            .then(function(r) { return r.text(); })
+            .then(function(html) {
+              var parser = new DOMParser();
+              var doc = parser.parseFromString(html, 'text/html');
+              var main = doc.querySelector('.pagina-main');
+              contenuto.innerHTML = main ? main.innerHTML : '';
+              overlay.classList.add('aperto');
+              document.body.style.overflow = 'hidden';
+              overlay.scrollTop = 0;
+            });
+        });
+      });
+
+      document.querySelector('.modal-chiudi').addEventListener('click', chiudi);
+      overlay.addEventListener('click', function(e) { if (e.target === overlay) chiudi(); });
+      document.addEventListener('keydown', function(e) { if (e.key === 'Escape') chiudi(); });
+
+      function chiudi() {
+        overlay.classList.remove('aperto');
+        document.body.style.overflow = '';
+        contenuto.innerHTML = '';
+      }
+    })();
+  </script>
 
