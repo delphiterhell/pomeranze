@@ -30,12 +30,12 @@
       </button>
       <nav class="site-nav" id="navigazione-principale" aria-label="Navigazione principale">
         <button class="nav-chiudi" aria-label="Chiudi menu">✕</button>
-        <a href="/index.html">Home</a>
-        <a href="/chi-sono.html">Chi sono</a>
-        <a href="/prodotti.html">Prodotti</a>
-        <a href="/workshop.html">Workshop</a>
-        <a href="/blog.html" class="attivo">Blog</a>
-        <a href="/contatti.html">Contatti</a>
+        <a href="/index.html" {% if activeNav == "home" %}class="attivo"{% endif %}>Home</a>
+        <a href="/chi-sono.html" {% if activeNav == "chi-sono" %}class="attivo"{% endif %}>Chi sono</a>
+        <a href="/prodotti.html" {% if activeNav == "prodotti" %}class="attivo"{% endif %}>Prodotti</a>
+        <a href="/workshop.html" {% if activeNav == "workshop" %}class="attivo"{% endif %}>Workshop</a>
+        <a href="/blog.html" {% if activeNav == "blog" %}class="attivo"{% endif %}>Blog</a>
+        <a href="/contatti.html" {% if activeNav == "contatti" %}class="attivo"{% endif %}>Contatti</a>
       </nav>
     </div>
   </header>
