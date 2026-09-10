@@ -11,6 +11,12 @@
   const contenitore = document.querySelector('.api-container');
   if (!contenitore) return;
 
+  /* Evita api duplicate se lo script viene eseguito più di una volta
+     (es. richiamato due volte, bfcache, reload particolari) */
+  if (contenitore.dataset.apiInizializzato === 'true') return;
+  contenitore.dataset.apiInizializzato = 'true';
+  contenitore.innerHTML = '';
+
   /* ---------- SVG di un'ape disegnata a mano ---------- */
   function creaSvgApe() {
     return `
@@ -42,26 +48,40 @@
   }
 
   /* ---------- Configurazioni api ----------
-     Mobile (<768px): 3 api distanziate; Desktop: 4 api          */
-  const mobile = window.innerWidth < 768;
+     Mobile (<768px): 5 api distanziate; Desktop: 11 api          */
+  // matchMedia usa la stessa soglia dei breakpoint CSS (max-width:767px),
+  // più affidabile di window.innerWidth per restare sempre in sync col layout
+  const mobile = window.matchMedia('(max-width: 767px)').matches;
 
+  /* Le api restano a destra della ragazza (che occupa la fascia sinistra
+     dello hero) per non passarle mai dietro, dove si vedrebbero in trasparenza,
+     e lontane dalla zona del bottone "Scopri i fiori" (basso a destra del testo).
+     Solo 4 animazioni di volo esistono (vola-1..4 in components.css), riusate a rotazione. */
   const configApi = mobile
     ? [
-        // Alto a sinistra — zona cielo
-        { startX: 25, startY: 12, animazione: 'vola-1', durata: '9s',  ritardo: '0s',  dimensione: '34px' },
-        // Centro-destra — campo aperto, più in alto
-        { startX: 65, startY: 28, animazione: 'vola-3', durata: '11s', ritardo: '-5s', dimensione: '30px' },
-        // Basso a sinistra — ben separato, più a sinistra e più in basso
-        { startX: 12, startY: 80, animazione: 'vola-2', durata: '13s', ritardo: '-8s', dimensione: '28px' },
+        // Mobile: la ragazza occupa il basso-sinistra, il bottone è nascosto
+        { startX: 45, startY: 12, animazione: 'vola-1', durata: '10s', ritardo: '-2s', dimensione: '24px' },
+        { startX: 70, startY: 8,  animazione: 'vola-5', durata: '9s',  ritardo: '0s',  dimensione: '34px' },
+        { startX: 90, startY: 20, animazione: 'vola-4', durata: '11s', ritardo: '-6s', dimensione: '26px' },
+        { startX: 60, startY: 62, animazione: 'vola-9', durata: '13s', ritardo: '-3s', dimensione: '28px' },
+        { startX: 82, startY: 80, animazione: 'vola-2', durata: '12s', ritardo: '-9s', dimensione: '30px' },
       ]
     : [
-        // Desktop: 4 api
-        { startX: 12, startY: 18, animazione: 'vola-1', durata: '9s',  ritardo: '0s',  dimensione: '38px' },
-        { startX: 30, startY: 55, animazione: 'vola-2', durata: '12s', ritardo: '-3s', dimensione: '32px' },
-        { startX: 48, startY: 30, animazione: 'vola-3', durata: '10s', ritardo: '-6s', dimensione: '36px' },
-        { startX: 18, startY: 68, animazione: 'vola-4', durata: '14s', ritardo: '-2s', dimensione: '30px' },
-        { startX: 48, startY: 30, animazione: 'vola-5', durata: '10s', ritardo: '-6s', dimensione: '36px' },
-        { startX: 80, startY: 78, animazione: 'vola-6', durata: '10s', ritardo: '-2s', dimensione: '30px' },
+        // Desktop: 9 api su una griglia sfalsata, ognuna con una traiettoria diversa
+        // (vola-1..9 in components.css), distribuite su tutta l'altezza/larghezza,
+        // fuori dalla zona della ragazza (sinistra) e dalla zona del bottone (basso-destra)
+        { startX: 42, startY: 10, animazione: 'vola-1', durata: '9s',  ritardo: '0s',  dimensione: '36px' },
+        // Traiettoria lunga: giro grande e tondo
+        { startX: 62, startY: 10, animazione: 'vola-10', durata: '18s', ritardo: '-4s', dimensione: '30px' },
+        { startX: 82, startY: 10, animazione: 'vola-3', durata: '10s', ritardo: '-7s', dimensione: '34px' },
+        // Traiettoria lunga: giro largo e schiacciato
+        { startX: 52, startY: 35, animazione: 'vola-11', durata: '19s', ritardo: '-2s', dimensione: '32px' },
+        { startX: 72, startY: 35, animazione: 'vola-5', durata: '12s', ritardo: '-6s', dimensione: '28px' },
+        { startX: 42, startY: 60, animazione: 'vola-6', durata: '14s', ritardo: '-3s', dimensione: '34px' },
+        // Traiettoria lunga: giro alto e stretto
+        { startX: 62, startY: 60, animazione: 'vola-12', durata: '17s', ritardo: '-8s', dimensione: '30px' },
+        { startX: 52, startY: 85, animazione: 'vola-8', durata: '12s', ritardo: '-5s', dimensione: '36px' },
+        { startX: 72, startY: 85, animazione: 'vola-9', durata: '13s', ritardo: '-10s', dimensione: '30px' },
       ];
 
   /* ---------- Creazione delle api nel DOM ---------- */

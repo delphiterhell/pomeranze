@@ -57,6 +57,9 @@
   height: 100svh;
   overflow: hidden;
   background-color: var(--testo);
+  /* Leggerissimo scale-down (1 → 0.97) impostato via JS mentre si scrolla
+     verso la sezione successiva, per una sensazione di profondità */
+  transform-origin: center center;
 }
 
 /* Sfondo: campo di fiori, si ritaglia liberamente */
@@ -298,35 +301,124 @@
 }
 
 /* Animazioni volo — definite qui, gestite da bees.js */
+/* Percorsi ad anello (ellisse chiusa che riparte dal punto di origine),
+   così il volo dell'ape descrive una curva morbida invece di zig-zag */
 @keyframes vola-1 {
   0%   { transform: translate(0, 0) rotate(0deg); }
-  20%  { transform: translate(60px, -40px) rotate(15deg); }
-  40%  { transform: translate(120px, 20px) rotate(-10deg); }
-  60%  { transform: translate(80px, 60px) rotate(20deg); }
-  80%  { transform: translate(20px, 30px) rotate(-5deg); }
+  20%  { transform: translate(52px, 24px) rotate(15deg); }
+  40%  { transform: translate(32px, 63px) rotate(-10deg); }
+  60%  { transform: translate(-32px, 63px) rotate(10deg); }
+  80%  { transform: translate(-52px, 24px) rotate(-15deg); }
   100% { transform: translate(0, 0) rotate(0deg); }
 }
 
 @keyframes vola-2 {
   0%   { transform: translate(0, 0) rotate(-5deg); }
-  25%  { transform: translate(-50px, -60px) rotate(10deg); }
-  50%  { transform: translate(-90px, 10px) rotate(-15deg); }
-  75%  { transform: translate(-40px, 50px) rotate(5deg); }
+  20%  { transform: translate(-47px, 27px) rotate(-15deg); }
+  40%  { transform: translate(-29px, 72px) rotate(10deg); }
+  60%  { transform: translate(29px, 72px) rotate(-10deg); }
+  80%  { transform: translate(47px, 27px) rotate(15deg); }
   100% { transform: translate(0, 0) rotate(-5deg); }
 }
 
 @keyframes vola-3 {
   0%   { transform: translate(0, 0) rotate(8deg); }
-  33%  { transform: translate(70px, -30px) rotate(-12deg); }
-  66%  { transform: translate(-30px, -60px) rotate(18deg); }
+  20%  { transform: translate(43px, -21px) rotate(-12deg); }
+  40%  { transform: translate(27px, -54px) rotate(18deg); }
+  60%  { transform: translate(-27px, -54px) rotate(-12deg); }
+  80%  { transform: translate(-43px, -21px) rotate(12deg); }
   100% { transform: translate(0, 0) rotate(8deg); }
 }
 
 @keyframes vola-4 {
   0%   { transform: translate(0, 0) rotate(0deg); }
-  30%  { transform: translate(-60px, -50px) rotate(-10deg); }
-  60%  { transform: translate(-100px, 30px) rotate(15deg); }
+  20%  { transform: translate(-46px, -22px) rotate(-10deg); }
+  40%  { transform: translate(-28px, -58px) rotate(15deg); }
+  60%  { transform: translate(28px, -58px) rotate(-15deg); }
+  80%  { transform: translate(46px, -22px) rotate(10deg); }
   100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+/* Anello largo e schiacciato, orario */
+@keyframes vola-5 {
+  0%   { transform: translate(0, 0) rotate(6deg); }
+  20%  { transform: translate(71px, 14px) rotate(20deg); }
+  40%  { transform: translate(44px, 36px) rotate(-8deg); }
+  60%  { transform: translate(-44px, 36px) rotate(8deg); }
+  80%  { transform: translate(-71px, 14px) rotate(-20deg); }
+  100% { transform: translate(0, 0) rotate(6deg); }
+}
+
+/* Anello stretto e alto, antiorario */
+@keyframes vola-6 {
+  0%   { transform: translate(0, 0) rotate(-8deg); }
+  20%  { transform: translate(-24px, -31px) rotate(6deg); }
+  40%  { transform: translate(-15px, -81px) rotate(-18deg); }
+  60%  { transform: translate(15px, -81px) rotate(18deg); }
+  80%  { transform: translate(24px, -31px) rotate(-6deg); }
+  100% { transform: translate(0, 0) rotate(-8deg); }
+}
+
+/* Anello grande e tondo, orario */
+@keyframes vola-7 {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  20%  { transform: translate(57px, 31px) rotate(12deg); }
+  40%  { transform: translate(35px, 81px) rotate(-18deg); }
+  60%  { transform: translate(-35px, 81px) rotate(18deg); }
+  80%  { transform: translate(-57px, 31px) rotate(-12deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+/* Anello piccolo e stretto, antiorario */
+@keyframes vola-8 {
+  0%   { transform: translate(0, 0) rotate(10deg); }
+  20%  { transform: translate(-33px, 17px) rotate(-6deg); }
+  40%  { transform: translate(-21px, 45px) rotate(14deg); }
+  60%  { transform: translate(21px, 45px) rotate(-14deg); }
+  80%  { transform: translate(33px, 17px) rotate(6deg); }
+  100% { transform: translate(0, 0) rotate(10deg); }
+}
+
+/* Anello medio e tondo, orario, verso l'alto */
+@keyframes vola-9 {
+  0%   { transform: translate(0, 0) rotate(-4deg); }
+  20%  { transform: translate(38px, -28px) rotate(16deg); }
+  40%  { transform: translate(24px, -72px) rotate(-20deg); }
+  60%  { transform: translate(-24px, -72px) rotate(20deg); }
+  80%  { transform: translate(-38px, -28px) rotate(-16deg); }
+  100% { transform: translate(0, 0) rotate(-4deg); }
+}
+
+/* ---- Traiettorie lunghe: solo per qualche ape, giro molto più ampio ---- */
+
+/* Anello grande e tondo, orario */
+@keyframes vola-10 {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  20%  { transform: translate(95px, 48px) rotate(14deg); }
+  40%  { transform: translate(59px, 127px) rotate(-20deg); }
+  60%  { transform: translate(-59px, 127px) rotate(20deg); }
+  80%  { transform: translate(-95px, 48px) rotate(-14deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+/* Anello largo e molto schiacciato, antiorario */
+@keyframes vola-11 {
+  0%   { transform: translate(0, 0) rotate(-6deg); }
+  20%  { transform: translate(-114px, 17px) rotate(10deg); }
+  40%  { transform: translate(-71px, 45px) rotate(-16deg); }
+  60%  { transform: translate(71px, 45px) rotate(16deg); }
+  80%  { transform: translate(114px, 17px) rotate(-10deg); }
+  100% { transform: translate(0, 0) rotate(-6deg); }
+}
+
+/* Anello alto e stretto, orario, verso l'alto */
+@keyframes vola-12 {
+  0%   { transform: translate(0, 0) rotate(4deg); }
+  20%  { transform: translate(29px, -55px) rotate(-18deg); }
+  40%  { transform: translate(18px, -145px) rotate(22deg); }
+  60%  { transform: translate(-18px, -145px) rotate(-22deg); }
+  80%  { transform: translate(-29px, -55px) rotate(18deg); }
+  100% { transform: translate(0, 0) rotate(4deg); }
 }
 
 @keyframes sbatti-ali {
@@ -355,6 +447,12 @@
   aspect-ratio: 4/3;
   object-fit: cover;
   background-color: var(--salvia);
+}
+
+/* Foto "Miele del campo": crop di default troppo basso (taglia via il volto
+   e lascia molto spazio alle arnie in fondo) — la sposto leggermente più in alto */
+.card-img-miele {
+  object-position: 50% 30%;
 }
 
 /* Placeholder colore per immagini mancanti */
@@ -625,6 +723,165 @@
   }
 }
 
+/* Sta leggermente "sopra" la hero (che nel frattempo si rimpicciolisce
+   un filo scrollando) per accentuare la sensazione di profondità */
+#chi-sono {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== CHI SONO — reveal editoriale allo scroll (scoped a #chi-sono) ===== */
+/* Attivato una sola volta da js/chi-sono-anim.js aggiungendo .co-visibile
+   alla section: le regole sotto sono cascate da quella classe, così la
+   coreografia (foglia → foto/finestra organica → cornice → label → titolo
+   riga per riga → testi → link) parte in un unico momento con delay
+   progressivi e leggermente sovrapposti (non un'attesa rigida in fila). */
+
+/* ---------- Foglia: "portata dal vento", con leggero overshoot ---------- */
+#chi-sono .co-foglia {
+  opacity: 0;
+  transform: translateY(10px) rotate(-5deg);
+}
+
+@keyframes co-foglia-vento {
+  0%   { opacity: 0; transform: translateY(10px) rotate(-5deg); }
+  70%  { opacity: 1; transform: translateY(-1px) rotate(1.5deg); }
+  100% { opacity: 1; transform: translateY(0) rotate(0deg); }
+}
+
+#chi-sono.co-visibile .co-foglia {
+  animation: co-foglia-vento 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Disegno del contorno della fogliolina (stroke-dasharray impostato da JS) */
+#chi-sono .co-foglia svg path {
+  transition: stroke-dashoffset 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.1s;
+}
+
+#chi-sono.co-visibile .co-foglia svg path {
+  stroke-dashoffset: 0 !important;
+}
+
+/* ---------- Foto: finestra organica che si apre (clip-path) ----------
+   Il colore/scale/parallax dell'immagine sono gestiti da JS (chi-sono-anim.js)
+   perché lo stesso transform ospita sia il tween d'entrata (scale 1.06→1)
+   sia il micro-parallax continuo legato allo scroll: qui la mask si occupa
+   solo della "finestra" che si apre, in clip-path puro (nessun fade). */
+#chi-sono .chi-sono-foto-mask {
+  clip-path: inset(72% 34% 6% 34% round 55% 55% 60% 60% / 65% 65% 40% 40%);
+  transform: translateY(10px);
+  transition: clip-path 1.45s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 1.45s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: clip-path, transform;
+}
+
+#chi-sono.co-visibile .chi-sono-foto-mask {
+  clip-path: inset(0 round 14px);
+  transform: translateY(0);
+}
+
+/* Il bordo verde compare poco dopo la foto, quasi "disegnato" intorno */
+#chi-sono .chi-sono-foto-cornice::before {
+  opacity: 0;
+  transform: scale(0.94);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.25s,
+              transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.25s;
+}
+
+#chi-sono.co-visibile .chi-sono-foto-cornice::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ---------- Label "Chi sono": prima la linea, poi il testo ---------- */
+#chi-sono .co-linea {
+  display: inline-block;
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.5s,
+              transform 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.5s;
+}
+
+#chi-sono .co-label {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.62s,
+              transform 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.62s;
+}
+
+/* ---------- Titolo: masked reveal riga per riga ----------
+   Ogni riga (co-riga-mask, creata da JS in base al wrapping reale del
+   testo) nasconde l'overflow; dentro, co-riga-inner parte da translateY(110%)
+   ed emerge fisicamente dal basso — nessun fade come effetto principale.
+   Il delay per-riga (stagger ~120ms) è impostato inline da JS. */
+#chi-sono .co-riga-mask {
+  display: block;
+  overflow: hidden;
+}
+
+#chi-sono .co-riga-inner {
+  display: block;
+  transform: translateY(110%);
+  transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+#chi-sono.co-visibile .co-riga-inner {
+  transform: translateY(0);
+}
+
+/* ---------- Testi: comparsa discreta, dopo il titolo ---------- */
+#chi-sono .co-para {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+#chi-sono .co-para:nth-of-type(1) { transition-delay: 1.65s; }
+#chi-sono .co-para:nth-of-type(2) { transition-delay: 1.8s; }
+
+#chi-sono .co-cta {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1) 2.05s,
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) 2.05s,
+              color var(--transizione),
+              text-decoration-color var(--transizione);
+}
+
+#chi-sono.co-visibile .co-linea {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+#chi-sono.co-visibile .co-label,
+#chi-sono.co-visibile .co-para,
+#chi-sono.co-visibile .co-cta {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #chi-sono .co-foglia,
+  #chi-sono .co-foglia svg path,
+  #chi-sono .chi-sono-foto-mask,
+  #chi-sono .chi-sono-foto-cornice::before,
+  #chi-sono .co-linea,
+  #chi-sono .co-label,
+  #chi-sono .co-riga-inner,
+  #chi-sono .co-para,
+  #chi-sono .co-cta {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+    stroke-dashoffset: 0 !important;
+  }
+}
+
 .chi-sono-foto {
   width: 100%;
   max-width: 440px;
@@ -706,6 +963,10 @@
 .divisore-crema .foglia-divisore,
 .foglia-bottom {
   margin-bottom: 0;
+}
+
+.foglia-bottom {
+  padding-top: 1.5rem;
 }
 
 .foglia-workshop {
@@ -831,6 +1092,7 @@
 @media (min-width: 768px) {
   .workshop-split {
     grid-template-columns: 1fr 1fr;
+    gap: 2rem;
   }
 }
 
@@ -938,23 +1200,53 @@
   margin-bottom: -0.25rem;
 }
 
-/* Foto Chi sono: cornicetta verde chiaro con padding crema */
+/* Foto Chi sono: cornicetta verde chiaro con padding crema.
+   Il bordo/sfondo verde vive su ::before (invece che sulla classe stessa)
+   così può comparire con un timing leggermente sfalsato rispetto alla foto,
+   senza mai nascondere l'immagine (vedi blocco animazioni più sotto). */
 .chi-sono-foto-cornice {
   display: block;
   width: 100%;
-  border: 2.5px solid var(--verde-chiaro);
+  border: 2.5px solid transparent;
   border-radius: 20px;
   padding: 10px;
+  background-color: transparent;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 0;
+}
+
+.chi-sono-foto-cornice::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 2.5px solid var(--verde-chiaro);
+  border-radius: 20px;
   background-color: var(--verde-chiaro);
   box-sizing: border-box;
+  z-index: -1;
+}
+
+/* Finestra che ritaglia la foto: qui vive il reveal organico (clip-path)
+   e il contenimento per il micro-parallax dell'immagine al suo interno */
+.chi-sono-foto-mask {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 14px;
+  overflow: hidden;
 }
 
 .chi-sono-foto-img {
+  position: absolute;
+  left: 0;
+  top: -15px;
   width: 100%;
+  height: calc(100% + 30px);
   border-radius: 14px;
-  aspect-ratio: 1/1;
   object-fit: cover;
-  object-position: 80% 20%;
+  object-position: 0% 50%;
   display: block;
   border: none;
 }
